@@ -8,10 +8,10 @@ body { font-family: Arial, Helvetica, sans-serif;}
 }
 
 #main {
-    background: url(images/orange.png) repeat-x;
+    background: url(/images/orange.png) repeat-x;
 }
 
 #main .container {
-        background: url(images/grey.png) no-repeat;
+        background: url(/images/grey.png) no-repeat;
 }
 
