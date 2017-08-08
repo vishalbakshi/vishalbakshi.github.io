@@ -1,0 +1,89 @@
+body {
+    background-color: white;
+    font-family: helvetica;
+
+}
+
+header {
+    width: 800px;
+    height: 150px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
+h1 {
+    color: black;
+    font-size: 3em;
+}
+
+h2 {
+    color: black;
+    font-size: 2.5em;
+}
+
+h3 {
+    color: black;
+    font-size: 1.25em;
+
+}
+
+h4 {
+    color: cornflowerblue;
+    font-size: 1em;
+}
+
+p {
+    color: black;
+    line-height: 120%; 
+    font-size: 1em;
+}
+
+p.posts {
+    font-size: 1em;
+    line-height: 120%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align:center;
+
+}
+
+li {
+    display: inline;
+	padding-left: 10px;
+
+}
+
+a:link {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
+a:visited {
+    text-decoration: none;
+    color: grey;
+}
+
+
+a.blacklink {
+    color: gray;
+    text-decoration: none;
+}
+
+#content {
+    width: 850px;
+    margin: auto;
+}
+
+#posts {
+    position: relative;
+    width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:100px;
+}
