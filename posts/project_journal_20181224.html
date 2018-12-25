@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="resume.html">Resume</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December 24, 2018</h2>
+            <p>Today, I started my first attempt at open source contribution. The "first-timers-only" and similarly labelled issues on
+                GitHub was what I was looking for. <a href="https://github.com/MunGell/awesome-for-beginners" target="_blank">This repo</a>
+                has an awesome list of such open issues.</p>
+            <p>The first project I am attempting to contribute to is Public Lab's <a href="https://github.com/publiclab/image-sequencer" target="_blank">Image Sequencer</a>.
+                The particular issue which is flagged as <code>first-timers-only</code> is <a href="https://github.com/publiclab/image-sequencer/issues/546" target="_blank">to create a test
+                for one of their modules which converts an image file to QR code.</a> The <code>jsqr</code> package has updated from its 0.2.2 version, and including that 
+                update without a test would leave them blind to anything that may break because of it.</p>
+            <p>I started by forking the repo to my GitHub account, cloning it onto my local computer, and practicing the <code>git fetch upstream</code> command. Initially
+                as I was following the online GitHub documentation (which is great by the way) which showed the <code>git fetch upstream master</code> command, I ran into issues
+                (i.e. that branch was not found) because the default branch on the upstream repo, which I had forked, was the <code>main</code> branch. The solution was, of course,
+                that I had to fetch the main branch from upstream. Ta-da!</p>
+            <p>I then created a new branch, <a href="https://github.com/vishalbakshi/image-sequencer/tree/decodeqr-test" target="_blank"><code>decodeqr-test</code></a>,
+                where I will start writing the tests.</p>
+            <p>Public Lab is using the <a href="https://www.npmjs.com/package/tape" target="_blank">tape</a> package, which uses the "tap" philosophy, which stands for 
+                <a href="https://testanything.org/" target="_blank">test anything</a>. I was able to make a basic initial test run:
+            
+            <pre>
+                    test('Initial test', function(t) {
+                        t.equal(true,true,'Initial test if true === true');
+                        t.end();
+                    })
+            </pre>
+            which was a feat in itself, since it took me awhile that I had to <code>npm run setup</code> in order to install the dependencies in their project before 
+            I could require them!</p>
+
+            <p>My next tasks on this project are:
+                <ul class="bulleted">
+                    <li class="bulleted">Understand what the DecodeQR module does</li>
+                    <li class="bulleted">Understand the difference between "unit tests" and "functional tests"</li>
+                    <li class="bulleted">Write one test for each unit</li>
+                    <li class="bulleted">Write one test for each functionality</li>
+                </ul>
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>
