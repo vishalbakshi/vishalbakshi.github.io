@@ -68,15 +68,23 @@ p.posts {
     line-height: 120%;
 }
 
-ul {
+ul.bulleted {
+    list-style-type: circle;
+    text-align: left;
+    display: block;
+}
+
+ul.not-bulleted {
     list-style-type: none;
+    display: inline;
     margin: 0;
     padding: 0;
     text-align:center;
 
 }
 
-li {
+
+li.not-bulleted {
     display: inline;
 	padding-left: 1%;
 
