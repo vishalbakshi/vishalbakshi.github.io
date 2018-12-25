@@ -21,38 +21,76 @@
         <div id="content">
             <br>
             <h2 class="title">Project Journal: December 24, 2018</h2>
-            <p>Today, I started my first attempt at open source contribution. The "first-timers-only" and similarly labelled issues on
-                GitHub was what I was looking for. <a href="https://github.com/MunGell/awesome-for-beginners" target="_blank">This repo</a>
-                has an awesome list of such open issues.</p>
-            <p>The first project I am attempting to contribute to is Public Lab's <a href="https://github.com/publiclab/image-sequencer" target="_blank">Image Sequencer</a>.
-                The particular issue which is flagged as <code>first-timers-only</code> is <a href="https://github.com/publiclab/image-sequencer/issues/546" target="_blank">to create a test
-                for one of their modules which converts an image file to QR code.</a> The <code>jsqr</code> package has updated from its 0.2.2 version, and including that 
-                update without a test would leave them blind to anything that may break because of it.</p>
-            <p>I started by forking the repo to my GitHub account, cloning it onto my local computer, and practicing the <code>git fetch upstream</code> command. Initially
-                as I was following the online GitHub documentation (which is great by the way) which showed the <code>git fetch upstream master</code> command, I ran into issues
-                (i.e. that branch was not found) because the default branch on the upstream repo, which I had forked, was the <code>main</code> branch. The solution was, of course,
-                that I had to fetch the main branch from upstream. Ta-da!</p>
-            <p>I then created a new branch, <a href="https://github.com/vishalbakshi/image-sequencer/tree/decodeqr-test" target="_blank"><code>decodeqr-test</code></a>,
-                where I will start writing the tests.</p>
-            <p>Public Lab is using the <a href="https://www.npmjs.com/package/tape" target="_blank">tape</a> package, which uses the "tap" philosophy, which stands for 
-                <a href="https://testanything.org/" target="_blank">test anything</a>. I was able to make a basic initial test run:
-            
-            <pre>
-                    test('Initial test', function(t) {
-                        t.equal(true,true,'Initial test if true === true');
-                        t.end();
-                    })
-            </pre>
-            which was a feat in itself, since it took me awhile that I had to <code>npm run setup</code> in order to install the dependencies in their project before 
-            I could require them!</p>
+            <h3>Entering the world of open source contributions</h3>
+                <p>
+                    Today, I started my first attempt at open source contribution. The "first-timers-only" and similarly labelled issues on
+                    GitHub was what I was looking for. <a href="https://github.com/MunGell/awesome-for-beginners" target="_blank">This repo</a>
+                    has an awesome list of such open issues.
+                </p>
+                <p>
+                    The first project I am attempting to contribute to is Public Lab's <a href="https://github.com/publiclab/image-sequencer" target="_blank">Image Sequencer</a>.
+                    The particular issue which is flagged as <code>first-timers-only</code> is <a href="https://github.com/publiclab/image-sequencer/issues/546" target="_blank">to create a test
+                    for one of their modules which converts an image file to QR code.</a> The <code>jsqr</code> package has updated from its 0.2.2 version, and including that 
+                    update without a test would leave them blind to anything that may break because of it.
+                </p>
+                <p>
+                    I started by forking the repo to my GitHub account, cloning it onto my local computer, and practicing the <code>git fetch upstream</code> command. Initially
+                    as I was following the online GitHub documentation (which is great by the way) which showed the <code>git fetch upstream master</code> command, I ran into issues
+                    (i.e. that branch was not found) because the default branch on the upstream repo, which I had forked, was the <code>main</code> branch. The solution was, of course,
+                    that I had to fetch the main branch from upstream. Ta-da!
+                </p>
+                <p>
+                    I then created a new branch, <a href="https://github.com/vishalbakshi/image-sequencer/tree/decodeqr-test" target="_blank"><code>decodeqr-test</code></a>,
+                    where I will start writing the tests.
+                </p>
+                <p>
+                    Public Lab is using the <a href="https://www.npmjs.com/package/tape" target="_blank">tape</a> package, which uses the "tap" philosophy, which stands for 
+                    <a href="https://testanything.org/" target="_blank">test anything</a>. I was able to make a basic initial test run:
+                
+                <pre>
+                        test('Initial test', function(t) {
+                            t.equal(true,true,'Initial test if true === true');
+                            t.end();
+                        })
+                </pre>
+                which was a feat in itself, since it took me awhile to figure out that I had to <code>npm run setup</code> in order to install the dependencies in their project before 
+                I could require them!</p>
 
-            <p>My next tasks on this project are:
-                <ul class="bulleted">
-                    <li class="bulleted">Understand what the DecodeQR module does</li>
-                    <li class="bulleted">Understand the difference between "unit tests" and "functional tests"</li>
-                    <li class="bulleted">Write one test for each unit</li>
-                    <li class="bulleted">Write one test for each functionality</li>
-                </ul>
+                <p>My next tasks on this project are:
+                    <ul class="bulleted">
+                        <li class="bulleted">Understand what the DecodeQR module does</li>
+                        <li class="bulleted">Understand the difference between "unit tests" and "functional tests"</li>
+                        <li class="bulleted">Write one test for each unit</li>
+                        <li class="bulleted">Write one test for each functionality</li>
+                    </ul>
+                </p>
+            <h3>JS Podcasts</h3>
+                <p>
+                    In order to fill my lack of intangible JavaScript and web development experience, I listened to my first set of programming related podcast episodes today.
+                    I have started with listening to current and previous episodes of <a href="https://www.syntax.fm" target="_blank">syntax.fm</a> and have loved every minute.
+                </p>
+                <p>
+                    Wes Bos and Scott Tolinski go through all sorts of topics related to the web development experience, from the breakdown of the
+                    <a href="https://stateofjs.com/" target="_blank">State of JavaScript</a> survey with one of its creators Sacha Grief, to best practices and tips for
+                    <a href="https://syntax.fm/show/093/hasty-treat-how-to-become-well-liked-at-work" target="_blank">how to be well-liked</a> (and/or how not to be disliked) at work.
+                </p>
+                <p>
+                    The most insightful episodes, for my beginner status, have been the <a href="https://syntax.fm/show/103/hasty-treat-where-are-they-now-part-2" target="_blank">
+                    Hasty Treat - Where are they now?</a> episodes, where Wes and Scott talk about technologies that were "hotness" back when, but have faded in popularity since.
+                    This bridges a vast lack of understanding I have of historical knowledge/origin stories for all things web development but especially JavaScript, with its 
+                    break-neck progress into the future.
+                </p>
+            <h3>On starting projects</h3>
+            <p>
+                I have been going (two weeks now) to a fantastic meetup called <a href="http://openoakland.org/" target="_blank">OpenOakland</a> which is held
+                in City Hall most every Tuesday. One of the team members there mentioned that GitHub was a "learning wall" that you had to break through and not 
+                a learning curve that you could ease into. This ties into my beginner status woes of starting on a project while holding the fear that I may not 
+                know enough to build it the "right way".
+            </p>
+            <p>
+                So I've jumped in and started creating projects that I've been chewing on for awhile. The first one, which will be the topic of many posts, I hope, 
+                is a <a href="https://github.com/vishalbakshi/et130webapp" target="_blank">web app I am creating for ET 130 (Applied Fluid Mechanics)</a>,
+                one of the courses I teach at CCSF. There are a few more ideas that I have been needing to roll out, and I will hopefully do so this week.
             </p>
         </div>
     </main>
