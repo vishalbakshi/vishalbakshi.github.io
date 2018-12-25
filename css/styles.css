@@ -53,6 +53,16 @@ p {
     font-size: 1em;
 }
 
+.greyed-out {
+    color: LightGrey;
+
+}
+
+a.greyed-out {
+    color: LightGrey;
+    text-decoration: none;
+}
+
 p.posts {
     font-size: 0.9em;
     line-height: 120%;
@@ -88,6 +98,9 @@ a.blacklink {
     text-decoration: none;
 }
 
+a.greyed-out:link {
+    color: LightGrey;
+}
 #content {
     width: 70%;
     margin: auto;
