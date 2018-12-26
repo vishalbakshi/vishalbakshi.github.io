@@ -135,11 +135,12 @@
             Additionally, <code>mongoose.connect()</code> returns a promise, and I'm not sure if it resolves once the <code>.save()</code> callback has run.
             I have not yet resolved (no pun intended) this issue, but I see the following next actions as most logical:
             <ul class="bulleted">
-                <li class="bulleted">Figure out how to ensure a connection is open prior to saving the document</li>
+                <li class="bulleted">Ensure a connection is open prior to saving a document</li>
                 <li class="bulleted">Understand the implications if <code>mongoose.mode()</code> and <code>mongoose.connect()</code>
                 live in two different files</li>
-                <li class="bulleted">Place both <code>mongoose.mode()</code>, <code>mongoose.connect()</code> and <code>app.route().post()</code> 
-                    in the same server.js, handle the POST request in that same file and then start moving each one to their separate files one by one</li>
+                <li class="bulleted">Place the <code>mongoose.model()</code>, <code>mongoose.connect()</code> and <code>app.route().post()</code> 
+                     logic in the same <em>server.js</em> file, handle the POST request in that same file and then start moving each one to their
+                     separate files one-by-one</li>
             </ul>
         </p>
         <p>
