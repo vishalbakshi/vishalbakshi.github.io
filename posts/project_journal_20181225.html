@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December 25, 2018</h2>
+            <p>Merry Christmas! Today was an interesting day in terms of my understanding of Node, Express, MongoDB and Mongoose. The current freeCodeCamp Project
+                I am working on is the second of five projects, <a href="https://vbakshi-isaq-project2.glitch.me/" target="_blank"><b>Issue Tracker</b></a>,
+                in the <em>Information Security and Quality Assurance</em> module. The goal of this project is to create a web app that allows a user to submit
+                information on project issues (such as title, text, created by, assigned to, etc) and retrieve the information on a project from a GET request.
+                I'm using Express with Node with a MongoDB database hosted
+                on mLab.
+            </p>
+            <p>
+                A couple things that are new for me in this project (I'm glad the fcc team decided to have these elements) which are challenging and deepening my understanding
+                of how code gets executed in a Node environment:
+            </p>
+            <h3>How responses are received by the front end</h3>
+            <p>
+                Thus far, in some of the other fcc back end projects, the response to a GET or POST request comes through in the browser on a new page. For example, 
+                in the <a href="https://vbakshi-exercise-tracker.glitch.me/api/exercise/new-user">exercise tracker</a> project, creating a new user via submitting a
+                form would result in the following response:
+            </p>
+            
+            <img src="../images/20181225_image1.png">
+            <p>
+                Where something to the effect of the following is used as the HTTP POST request route:
+            </p>
+        <pre>
+        <code class="language-javascript">
+        app.post("/api/exercise/new-user", function(req, res) {
+            // Create user object to save as a document in the UserCollection collection
+            let user = new UserCollection({username: req.body.username});
+                            
+            user.save(function (err) {
+
+                // return error response to avoid sending the "success" response
+                if (err) return res.end("username already exists");
+                          
+                // send the success response
+                res.send({"username": user.username, "userId": user._id}); 
+
+            });
+        });
+        </code>
+        </pre>
+        <p>
+            However, in this Issue Tracker project the boilerplate they have given, which is generally assumed to be followed in order to pass their
+            tests, prevents the default form action when the user clicks submit. Instead, an AJAX request receives the response and displays it on the 
+            current page.
+        </p>
+        <pre><code class="language-javascript">
+        $('#testForm').submit(function(e) {
+            $.ajax({
+                url: '/api/issues/apitest',
+                type: 'post',
+                data: $('#testForm').serialize(),
+                success: function(data) {
+                $('#jsonResult').text(JSON.stringify(data));
+                }
+            });
+            e.preventDefault(); // also, the form does not have `action` or `method` attributes defined
+        });
+        </code>
+        </pre>
+        <p>
+            In these projects, I usually start by sending a simple response such as...
+        </p>
+        <pre><code class="language-javascript">res.send('Post request received!')</code></pre>
+        <p>just to make sure the basic functionality is covered.
+            ...so per usual, I tried that code in this situation and it didn't show as such in the browser, which led me to figure out the above.
+        </p>
+        <h3>Saving documents in Mongoose models</h3>
+        <p>
+            This is the first project in fcc where I've created seprate files for separate responsibilities. A <em>models/issues.js</em> file creates the Mongoose
+            model which will hold documents with information on submitted issues through the form, the <em>routes/api.js</em> has my GET, POST and PUT routing logic, and the <em>server.js</em> file receives those routes 
+            via a  <code>require</code>.
+        </p>
+        <p>
+            Thus comes the question: <e>where and when should my server connect to my database?</e> For context, I am using a free MongoDB database hosted on mLab.
+            Based on some of the examples in the fcc challenges, I first chose to create a database connection inside the POST route inside of my <em>routes/api.js</em>
+            file, and created/saved the document from the form request inside of the <code>mongoose.connect</code> callback like the following <strong>incorrect</strong>
+            pseudocode:
+        </p>
+        <pre>
+        <code class="language-javascript">
+        app.route('/api/issues/:project')
+            .post(function(req, res) {
+                let objectFollowingTheSchema = //...create object from fields in the request body
+
+                mongoose.connect(URI, function(err, db) {
+                    if (err) {//..handle errors}
+                    let issue = new issueCollection(objectFollowingTheSchema);
+                    issue.save(function(err) {
+                        //...handle the error
+                    })
+                    
+                })
+
+                return res.send() // returns a response
+            })
+        </code>
+        </pre>
+        <p>
+            Upon submitting the form once, a document was added to the issueCollection and was successfully saved. However, upon subsequent POST requests,
+            I noticed that the issueCollection still only had 1 document. 
+        </p>
+        <p>
+            After some Stackoverflow/Google searches without luck, I browsed through the Mongoose docs and found the following (emphasis is mine):
+        </p>
+        <blockquote>
+                Note that no [documents] will be created/removed <em>until the connection your model uses is open.</em> Every model has an associated connection.
+                When you use mongoose.model(), your model will use the default mongoose connection.
+        </blockquote>
+        <p>
+            Additionally, <code>mongoose.connect()</code> returns a promise, and I'm not sure if it resolves once the <code>.save()</code> callback has run.
+            I have not yet resolved (no pun intended) this issue, but I see the following next actions as most logical:
+            <ul class="bulleted">
+                <li class="bulleted">Figure out how to ensure a connection is open prior to saving the document</li>
+                <li class="bulleted">Understand the implications if <code>mongoose.mode()</code> and <code>mongoose.connect()</code>
+                live in two different files</li>
+                <li class="bulleted">Place both <code>mongoose.mode()</code>, <code>mongoose.connect()</code> and <code>app.route().post()</code> 
+                    in the same server.js, handle the POST request in that same file and then start moving each one to their separate files one by one</li>
+            </ul>
+        </p>
+        <p>
+            Hopefully this week shall bring more clarity to this project.
+        </p>
+
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
