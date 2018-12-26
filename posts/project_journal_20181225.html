@@ -45,43 +45,46 @@
             <p>
                 Where something to the effect of the following is used as the HTTP POST request route:
             </p>
-        <pre>
-        <code class="language-javascript">
-        app.post("/api/exercise/new-user", function(req, res) {
-            // Create user object to save as a document in the UserCollection collection
-            let user = new UserCollection({username: req.body.username});
-                            
-            user.save(function (err) {
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    app.post("/api/exercise/new-user", function(req, res) {
+        // Create user object to save as a document in the UserCollection collection
+        let user = new UserCollection({username: req.body.username});
+                        
+        user.save(function (err) {
 
-                // return error response to avoid sending the "success" response
-                if (err) return res.end("username already exists");
-                          
-                // send the success response
-                res.send({"username": user.username, "userId": user._id}); 
+            // return error response to avoid sending the "success" response
+            if (err) return res.end("username already exists");
+                        
+            // send the success response
+            res.send({"username": user.username, "userId": user._id}); 
 
-            });
         });
+    });
         </code>
         </pre>
+        </div>
         <p>
             However, in this Issue Tracker project the boilerplate they have given, which is generally assumed to be followed in order to pass their
             tests, prevents the default form action when the user clicks submit. Instead, an AJAX request receives the response and displays it on the 
             current page.
         </p>
+        <div class="code-container">
         <pre><code class="language-javascript">
-        $('#testForm').submit(function(e) {
-            $.ajax({
-                url: '/api/issues/apitest',
-                type: 'post',
-                data: $('#testForm').serialize(),
-                success: function(data) {
-                $('#jsonResult').text(JSON.stringify(data));
-                }
-            });
-            e.preventDefault(); // also, the form does not have `action` or `method` attributes defined
+    $('#testForm').submit(function(e) {
+        $.ajax({
+            url: '/api/issues/apitest',
+            type: 'post',
+            data: $('#testForm').serialize(),
+            success: function(data) {
+            $('#jsonResult').text(JSON.stringify(data));
+            }
         });
+        e.preventDefault(); // also, the form does not have `action` or `method` attributes defined
+    });
         </code>
         </pre>
+        </div>
         <p>
             In these projects, I usually start by sending a simple response such as...
         </p>
@@ -101,25 +104,26 @@
             file, and created/saved the document from the form request inside of the <code>mongoose.connect</code> callback like the following <strong>incorrect</strong>
             pseudocode:
         </p>
-        <pre>
-        <code class="language-javascript">
-        app.route('/api/issues/:project')
-            .post(function(req, res) {
-                let objectFollowingTheSchema = //...create object from fields in the request body
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    app.route('/api/issues/:project')
+        .post(function(req, res) {
+            let objectFollowingTheSchema = //...create object from fields in the request body
 
-                mongoose.connect(URI, function(err, db) {
-                    if (err) {//..handle errors}
-                    let issue = new issueCollection(objectFollowingTheSchema);
-                    issue.save(function(err) {
-                        //...handle the error
-                    })
-                    
+            mongoose.connect(URI, function(err, db) {
+                if (err) {//..handle errors}
+                let issue = new issueCollection(objectFollowingTheSchema);
+                issue.save(function(err) {
+                    //...handle the error
                 })
-
-                return res.send() // returns a response
+                
             })
+
+            return res.send() // returns a response
+        })
         </code>
         </pre>
+        </div>
         <p>
             Upon submitting the form once, a document was added to the issueCollection and was successfully saved. However, upon subsequent POST requests,
             I noticed that the issueCollection still only had 1 document. 

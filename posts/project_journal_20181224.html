@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width">
         <title>Vishal Bakshi</title>
         <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
     </head>
 <body>
     <header>
@@ -47,13 +48,15 @@
                 <p>
                     Public Lab is using the <a href="https://www.npmjs.com/package/tape" target="_blank">tape</a> package, which uses the "tap" philosophy, which stands for 
                     <a href="https://testanything.org/" target="_blank">test anything</a>. I was able to make a basic initial test run:
-                
-                <pre>
-                        test('Initial test', function(t) {
-                            t.equal(true,true,'Initial test if true === true');
-                            t.end();
-                        })
+                <div class="code-container">
+                <pre><code class="language-javascript">
+test('Initial test', function(t) {
+    t.equal(true,true,'Initial test if true === true');
+    t.end();
+})
+                </code>
                 </pre>
+                </div>
                 which was a feat in itself, since it took me awhile to figure out that I had to <code>npm run setup</code> in order to install the dependencies in their project before 
                 I could require them!</p>
 
@@ -95,6 +98,6 @@
             </p>
         </div>
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
 </body>
 </html>

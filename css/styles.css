@@ -133,14 +133,15 @@ img {
     margin: auto;
 }
 
-pre {
+.code-container {
     display: block;
-    width: auto;
-    margin: auto;
-    padding: 100px;
-    font-size: 0.8em;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
+pre {
+    font-size: 0.7em;
+}
 
 blockquote {
     font-size: 0.9em;
@@ -149,4 +150,17 @@ blockquote {
     background: #eee;
     border-radius: 5px;
     padding: 15px;
+}
+@media (min-width: 1224px) {
+
+    pre {
+        font-size: 1.2em;
+        border-radius: 15px;
+    }
+
+    .code-container {
+        display: block;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
 }
