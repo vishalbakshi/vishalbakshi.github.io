@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December, 26, 2018</h2>
+            <p>
+                Today was quite a dive into MongoDB. <a href="../posts/project_journal_20181225.html" target="_blank">Yesterday</a> I 
+                was having trouble wrapping (pun intended) my head around Mongoose, especially when it comes to making CRUD operations 
+                from HTTP requests.
+            </p>
+            <p>
+                As a newbie, I tend to overcompensate my ignorance with information overload. Sometimes it's effective, other times it's
+                not. The jury's still out, but today's dive was fun:
+            </p>
+            <h3>Understanding MongoDB</h3>
+            <p>
+                What leads me to information overload is the desire to peel back any immediately available abstractions. In this
+                case, Mongoose is the culprit of the abstraction and I'm gambling that this abstraction is keeping me from Understanding
+                the core concepts of MongoDB.
+            </p>
+            <p>
+                Another wonderfully open-source curriculum I have been a beneficiary of: <a href="https://nodeschool.io/" target="_blank">
+                NodeSchool</a>. Thus far, I have enjoyed and completed the following "workshoppers", which are standalone curricula that
+                you can install via npm:
+                <ul class="bulleted">
+                    <li class="bulleted"><a href="https://github.com/workshopper/learnyounode" target="_blank">learnyounode</a></li>
+                    <li class="bulleted"><a href="https://github.com/jlord/git-it-electron" target="_blank">git-it</a></li>
+                    <li class="bulleted"><a href="https://github.com/azat-co/expressworks" target="_blank">expressworks</a></li>
+                    <li class="bulleted"><a href="https://github.com/evanlucas/learnyoumongo" target="_blank">learnyoumongo</a></li>
+                </ul>
+
+                That last one is the workshopper I did today. Because it was written for a previous
+                version of MongoDB, it helped me understand some of the following concepts:
+                <ul class="bulleted">
+                    <li class="bulleted">A new <code>MongoClient.connect()</code> provides the client, and not the database, in its callback</li>
+                    <li class="bulleted"><code>client.db()</code> accepts the database name and returns that database instance</li>
+                    <li class="bulleted"><code>client.close()</code> closes the connection</li>
+                </ul>
+
+                The following source helped greatly: <em><a href="https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html" target="_blank">
+                MongoClient or how to connect in a new and better way</a></em>.
+            </p>
+            <h3>Replacing Mongoose with MongoClient</h3>
+            <p>
+                For now, I've chosen to revise my app so that it uses MongoDB directly instead of Mongoose. I started by replacing the 
+                <code>mongoose.connect() </code> method with the following:
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+        const client = new MongoClient(MONGO_URI,
+            { useNewUrlParser: true });
+
+        client.connect(function(err) {
+            assert.equal(null, err);
+            console.log("Connected correctly to server");  
+            
+            // Get instance of database on mLab
+            let db = client.db(dbName);
+
+            // Create new collection, then close the connection
+            createIssueCollection(db, function() {
+                client.close();
+            });
+        });
+        </code>
+        </pre>
+        </div>
+            <p>
+                The purpose of the <code>createIssueCollection() </code> function is to create a new collection and close the client if
+                the collection was created. The <code>validator</code>  in the Collection constructor takes the place of Mongoose's Schema.
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+        function createIssueCollection(db, callback) {
+
+            db.createCollection('issueCollection', {
+                validator: {
+                    $jsonSchema: { 
+                        issueSchema 
+                    }
+                }
+            }, function(err, results) {
+                    assert.equal(null, err);
+                    console.log('Collection created');
+                    callback();
+                });
+            
+        }
+        </code>
+        </pre>
+        </div>
+            <p>
+                This hurdle was passed, and the success messages came through on the console:
+            </p>
+            <img src="../images/collectionCreatedLog.png">
+            <p>
+                Hopefully tomorrow I can get the CRUD operations working and then start bringing the routes into the picture.
+            </p>
+            <h3>Another great Syntax episode</h3>
+            <p>
+                As I was working on the learnyoumongo workshopper, I had to go through and setup the bash_profile, among other bash related
+                tasks, which made me revisit my inexperience with bash.
+            </p>
+            <p>
+                "I wonder if they have an episode about bash..."
+            </p>
+            <p>
+                Lo and behold! <a href="https://syntax.fm/show/013/the-command-line-for-web-developers" target="_blank">They do</a>. Well, 
+                at least about the terminal in general.
+            
+            </p>
+            <br>
+            <br>
+            <br>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
