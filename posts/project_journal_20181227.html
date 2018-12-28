@@ -83,7 +83,7 @@
             One main takeaway, which is obvious in hindsight: don't expect anything about the timing of async functions.
         </p>
         <p>
-            Another main takeaway: I need to learn best practices for MongoDB Node driver.
+            Another main takeaway: I need to learn best practices for the MongoDB Node driver.
         </p>
         <h3>Documentation for the correct version</h3>
         <p>
@@ -109,13 +109,15 @@
         <h3>Smoother operations</h3>
         <p>
             What a difference a Promise makes! I was able to (at least syntactically) make my web routes work using the <code>MongoClient.connect()</code> 
-            Promise. I created a function for each CRUD operation that receives the necessary input arguments for the associated MongoDB collection methods.
+            Promise. I created a function for each CRUD operation that receives the necessary input arguments for the associated MongoDB collection method.
             Each CRUD function also receives a <code>resCallback</code> sent from within the HTTP method router which sends a response after 
             MongoDB does its task:
         </p>
 
         <div class="code-container">
         <pre><code class="language-javascript">
+        const conn = MongoClient.connect(url, {useNewUrlParser: true});
+
         function connectAndCRUD(doc, callback) {
             conn.then( 
                 // perform CRUD operation
