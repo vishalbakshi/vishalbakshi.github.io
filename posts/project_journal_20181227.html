@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December 27, 2018</h2>
+            <p>
+                I experienced the implications of asynchronous functions the hard way today. I had written something like the following:
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+        MongoClient.connect(
+
+            // handle errors
+            let db = client.db('database name')
+
+            // call another function to create a new collection
+            createNewCollection(db, function() { client.close() });
+
+        );
+
+        function createNewCollection(db, callback) {
+
+            // create new collection in db
+            db.createCollection('collection name', options);
+            
+            // closes the connection
+            callback();
+        
+        }
+
+        // function to be called later on in POST request handler
+        function connectAndInsert(doc) {
+            MongoClient.connect(
+                // handle errors
+                // insert new document into db
+                client.close();
+            );
+        }
+
+        app.route('/action-after-form')
+           .post(function(req, res) {
+               // create a new document from request body
+               let newDocument = {key: val}
+               connectAndInsert(newDocument);
+               // return a response
+           })
+        </code>
+        </pre>
+        </div>
+        <p>
+            This, however, resulted in the following error message:
+        </p>
+        <blockquote>
+            <code>Error inserting document: MongoError: server instance pool was destroyed</code>
+        </blockquote>
+        <p>
+            Essentially, I was creating and closing the connection in two different locations in my code, asynchronously, and the timing 
+            on those events was not unfolding in the manner in which I was expecting, so the connection was closing before it inserted 
+            the new document.
+        </p>
+        <p>
+            One main takeaway, which is obvious in hindsight: don't expect anything about the timing of async functions.
+        </p>
+        <p>
+            Another main takeaway: I need to learn best practices for MongoDB Node driver.
+        </p>
+        <h3>Documentation for the correct version</h3>
+        <p>
+            I fundamentally did not understand the API reference, leading to the issues above, and additionally, it turns out that the awesome reference I followed yesterday, <em><a href="https://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html" target="_blank">
+            MongoClient or how to connect in a new and better way</a></em>, is quite outdated. 
+        </p>
+        <p>
+            What I should have been doing is following the documentation for the version (3.1.10) that I had installed for my project,
+            <a href="https://www.npmjs.com/package/mongodb" target="_blank">which is available directly from the associated npm page</a>.
+        </p>
+        <h3>Best practices for connecting to a MongoDB database</h3>
+        <p>
+            Thus far, I have found the following information on "best way to connect to MongoDB" and similar questions:
+            <ul class="bulleted">
+                <li class="bulleted">StackOverflow: <a href="https://stackoverflow.com/questions/38485575/best-way-to-connect-to-mongodb-using-node-js" target="_blank">Best way to connect to MongoDB using Node.js</a></li>
+                <ul><li class="bulleted">which is a duplicate of: <a href="https://stackoverflow.com/questions/10656574/how-do-i-manage-mongodb-connections-in-a-node-js-web-application" target="_blank">How do I manage MongoDB connections in a Node.js web application?</a></li></ul>
+                <ul><ul><li class="bulleted">which references: <a href="https://groups.google.com/forum/#!msg/node-mongodb-native/mSGnnuG8C1o/Hiaqvdu1bWoJ" target="_blank">What is correct MongoClient Connection String for ReplicaSet with Auth?</a></li></ul></ul>
+            </ul>
+        </p>
+        <p>
+            Given that <code>MongoClient.connect()</code> returns a Promise, I can then use that for multiple connections throughout my <em>api.js</em> file.
+        </p>
+        <h3>Smoother operations</h3>
+        <p>
+            What a difference a Promise makes! I was able to (at least syntactically) make my web routes work using the <code>MongoClient.connect()</code> 
+            Promise. I created a function for each CRUD operation that receives the necessary input arguments for the associated MongoDB collection methods.
+            Each CRUD function also receives a <code>resCallback</code> sent from within the HTTP method router which sends a response after 
+            MongoDB does its task:
+        </p>
+
+        <div class="code-container">
+        <pre><code class="language-javascript">
+        function connectAndCRUD(doc, callback) {
+            conn.then( 
+                // perform CRUD operation
+                callback(message);
+            )
+        }
+
+        //...later on in the file...//
+
+        app.route('/path/to/route')
+           .get(function(res, req) {
+
+               function resCallback(obj) {
+                   res.send(obj);
+               }
+
+                // do GET logic
+                connectAndFind(somethingToFind, resCallback);
+
+            });
+        </code>
+        </pre>
+        </div>
+        <h3>Podcast episode of the day</h3>
+        <p>
+            I switched it up today <em>*gasp*</em> and listened to the latest episode of <a href="http://www.fullstackradio.com/" target="_blank">
+            Full Stack Radio</a> by Adam Wathan. The talk was with Jonathan Reinink, who discusses ways to use queries to off-load some of the data 
+            wrangling to the database layer instead of doing it with server-side logic. Some of the intangible topics that came up which are not really 
+            in my immediate vision as I work through my projects:
+            <ul class="bulleted">
+                <li class="bulleted">Limiting the number of queries you send to your database</li>
+                <li class="bulleted">Caching</li>
+                <li class="bulleted">Server response time</li>
+            </ul>
+        </p>
+        <p>
+            I think the core concept I need to learn, in order to better understand that episode and related content, is that of caches and memory usage in general.
+            MongoDB speaks of this topic in their manual, and two main points stand out:
+
+            <blockquote>
+                    Technically, the operating system’s virtual memory subsystem manages MongoDB’s memory. 
+                    This means that MongoDB will use as much free memory as it can, swapping to disk as needed. 
+                    Deployments with enough memory to fit the application’s working data set in RAM will achieve the best performance.
+            </blockquote>
+            <br>
+            <blockquote>
+                    MongoDB keeps most recently used data in RAM. If you have created indexes for your queries and your working data set fits in RAM, MongoDB serves all queries from memory.
+                    MongoDB does not cache the query results in order to return the cached results for identical queries.
+                    For more information on MongoDB and memory use, see WiredTiger and Memory Use and MMAPv1 and Memory Use.
+            </blockquote>
+        </p>
+        <p>
+            I don't want to dig in any deeper on this topic right now, but inevitably will cross paths with this issue.
+        </p>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
