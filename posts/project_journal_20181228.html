@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December 28, 2018</h2>
+            <p>
+                My progress on understanding the <code class="inline-code">MongoClient.connect()</code> Promise paid off today as I was able to 
+                complete all but one of the remaining <em>User Stories</em> for the <a hre="https://vbakshi-isaq-project2.glitch.me/" target="_blank">
+                Issue Tracker project from freeCodeCamp</a>.
+            </p>
+            <p>
+                The last User story involves a task that I am relatively unfamiliar with: testing. I am to write 11 functional tests and have them 
+                pass before the project can be considered complete. I am giddy about doing this step as I think it will give me the confidence to plunge into
+                and learn to navigate the world of testing--a much needed skill as I continue to work on more complex projects.
+            </p>
+            <h3>Oh that's why they created the abstraction</h3>
+            <p>
+                When I decided to write my database methods using the MongoDB Node driver directly, I expected some additional head-scratching since I 
+                was trading the efficiency and stability that Mongoose provided for a better understanding of MongoDB.
+            </p>
+            <p>
+                The experience matched my expecatations. The main hiccup I exprienced was with error handling. In the past, through 
+                different tutorials/exercises, I would use something like the following:
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    collection.deleteOne(query, opts, function(error, data) {
+        if (error) { console.log(error); }
+    })
+        </code>
+        </pre>
+        </div>
+        <p>
+            For one reason or another, either because I was not running queries that caused errors, or Mongoose handled errors correctly, 
+            this used to work okay. Today, however, when I intentionally caused an error, I still received the success response.
+        </p>
+        <p>
+            In the Issue Tracker project, you can delete an issue by providing its ID in a form as such:
+        </p>
+        <img src="../images/deleteIssueForm.png">
+        
+        <p>
+            The <em>_id</em> provided by the user must be a 12-byte hexidecimal string. If it's not, I have the following in the 
+            <em>.delete()</em> router, where the regex is taken from mongodb <a href="http://mongodb.github.io/node-mongodb-native/2.0/api/objectid.js.html" target="_blank">
+            source code</a>:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    // Check that issueId provided in the form is valid
+    let checkForHexRegExp = new RegExp('^[0-9a-fA-F]{24}$');
+    if (!checkForHexRegExp.test(id)) {
+        return res.send({
+            "error": "Please provide valid issue _id"
+            });
+    }
+        </code>
+        </pre>
+        </div>
+        <p>
+            However, suppose the submitted <em>_id</em> passes the regex, but is not an ObjectId for one of the collection's documents.
+            Oddly enough, the value of <code class="inline-code">error</code> in my <code class="inline-code">collection.find()</code> callback was <code class="inline-code">null</code>.
+            The value of <code class="inline-code">result</code>, however, was not!
+        </p>
+        <img src="../images/resultObject.png">
+        <p>
+            The <code class="inline-code">ok</code> property of the <code class="inline-code">result</code> object was also the succesful <code class="inline-code">1</code>.
+            The key to identifying this error was the <code class="inline-code">n</code> property, which is the number of documents deleted.
+        </p>
+        <p>
+            Thus, to ensure that the client was given the correct response (success or failure), I used the following conditionals:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+        if (error || result.result.n == 0) { 
+            message = 'could not delete ' + issueId;
+        }
+    
+        if (result.result.n == 1 && result.result.ok == 1) {
+            message = 'deleted ' + issueId;
+        }
+
+        return callback(message);
+        </code>
+        </pre>
+        </div>
+        <p>
+            There are probably better (more robust, more efficient) ways of writing this logic. I'll be testing its robustness tomorrow during 
+            testing.
+        </p>
+        <h3>skateboards turn into automobiles</h3>
+        <p>
+            I listened to another episode of Full Stack Radio today: <a href="http://www.fullstackradio.com/101"  target="_blank">Ben Orenstein - How to 
+            Build an App in a Week</a>. This was a brilliant episode, where Ben discussed common hurdles developers face when creating an app, 
+            no matter how simple or complex it may be. Some paraphrased points from this episode that really moved/motivated me:
+            <ul class="bulleted">
+                <li class="bulleted">We were well setup for the situation...and wanted to launch before the end of the trip</li>
+                <ul class="bulleted"><li class="bulleted">Ben on creating <a href="https://www.trailmix.life/"  target="_blank">trailmix.life</a> during a week-long "codecation"</li></ul>
+                <li class="bulleted">Reducing the scope while still making a useful app</li>
+                <li class="bulleted">You find yourself building all of this ancillary stuff before you get to the heart of the problem</li>
+                <li class="bulleted">Start coding the thing that's impossible to do manually, then the next most annoying thing to do manually, and so on</li>
+                <li class="bulleted">Don't handle edge cases and iceberg problems upfront, since that's when you understand your app the least</li>
+                <li class="bulleted">Start with the 2-week version of the app (skateboard), not the 1 year version of it (automobile). Referencing <a href="http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp"  target="_blank">
+                this by Henrik Kniberg</a></li>
+            </ul>
+        </p>
+        <p>
+            I will be revisiting the <a href="https://github.com/vishalbakshi/et130webapp/blob/master/README.md" target="_blank">Big Picture</a> overview for one of my hobby projects 
+            with this new lens this weekend.
+        </p>
+        <br>
+        <br>
+        <br>
+        </div>
+    
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>

@@ -91,7 +91,7 @@ li.not-bulleted {
 }
 
 li.bulleted {
-    padding-top: 5px;
+    padding-top: 20px;
 }
 a:link {
     text-decoration: none;
@@ -131,6 +131,7 @@ img {
     padding-top: 50px;
     padding-bottom: 50px;
     margin: auto;
+    border-radius: 15px;
 }
 
 .code-container {
@@ -141,6 +142,11 @@ img {
 
 pre {
     font-size: 0.7em;
+}
+
+code.inline-code {
+    font-size: 1.25em;
+    color: deeppink;
 }
 
 blockquote {

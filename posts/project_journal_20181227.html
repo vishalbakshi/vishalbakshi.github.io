@@ -72,7 +72,7 @@
             This, however, resulted in the following error message:
         </p>
         <blockquote>
-            <code>Error inserting document: MongoError: server instance pool was destroyed</code>
+            <code class="inline-code">Error inserting document: MongoError: server instance pool was destroyed</code>
         </blockquote>
         <p>
             Essentially, I was creating and closing the connection in two different locations in my code, asynchronously, and the timing 
@@ -104,19 +104,19 @@
             </ul>
         </p>
         <p>
-            Given that <code>MongoClient.connect()</code> returns a Promise, I can then use that for multiple connections throughout my <em>api.js</em> file.
+            Given that <code class="inline-code">MongoClient.connect()</code> returns a Promise, I can then use that for multiple connections throughout my <em>api.js</em> file.
         </p>
         <h3>Smoother operations</h3>
         <p>
-            What a difference a Promise makes! I was able to (at least syntactically) make my web routes work using the <code>MongoClient.connect()</code> 
+            What a difference a Promise makes! I was able to (at least syntactically) make my web routes work using the <code class="inline-code">MongoClient.connect()</code> 
             Promise. I created a function for each CRUD operation that receives the necessary input arguments for the associated MongoDB collection method.
-            Each CRUD function also receives a <code>resCallback</code> sent from within the HTTP method router which sends a response after 
+            Each CRUD function also receives a <code class="inline-code">resCallback</code> sent from within the HTTP method router which sends a response after 
             MongoDB does its task:
         </p>
 
         <div class="code-container">
         <pre><code class="language-javascript">
-        const conn = MongoClient.connect(url, {useNewUrlParser: true});
+        const conn = MongoClient.connect(url, options);
 
         function connectAndCRUD(doc, callback) {
             conn.then( 
