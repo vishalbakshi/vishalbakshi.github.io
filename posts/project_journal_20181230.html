@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: December 30, 2018</h2>
+            <p>
+                It was a bittersweet weekend (more sweet than bitter) for the (American) football fan in me.
+                <ul class="bulleted">
+                    <li class="bulleted"><a href="http://www.espn.com/college-football/recap?gameId=401032075" target="_blank">Iowa State lost 26-28 in the Alamo Bowl</a></li>
+                    <ul class="bulleted">
+                        <li class="bulleted">Bitter: they lost</li>
+                        <li class="bulleted">Sweet: they have an awesome quarterback who is only a freshman</li>
+                    </ul>
+                    <li class="bulleted"><a href="http://www.espn.com/nfl/recap?gameId=401030727" target="_blank">The Eagles are in the playoffs</a></li>
+                    <ul class="bulleted">
+                        <li class="bulleted">Bitter: not a single thing</li>
+                        <li class="bulleted">Sweet: they're in the playoffs</li>
+                        <li class="bulleted">Irony: the team that helped them get there (Bears) are who they will face in the wild card</li>
+                    </ul>
+                </ul>
+            </p>
+            <p>
+                It was a sweet-sweet weekend in my world of web development, as I was able to complete the following two workshoppers from Nodeschool:
+                <ul class="bulleted">
+                    <li class="bulleted"><a href="https://github.com/stevekane/promise-it-wont-hurt" target="_blank">promise-it-wont-hurt</a></li>
+                    <li class="bulleted"><a href="https://github.com/workshopper/test-anything" target="_blank">test-anything</a></li>
+                </ul>
+            </p>
+            <h3>Takeaways from promise-it-wont-hurt</h3>
+            <p><em>promise-it-wont-hurt</em> was a challenging but fantastic workshopper that walked through different aspects of Promises in JavaScript. Some key takeaways, besides the fundamentals that I won't bother
+                trying to write more effectively than <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">MDN</a>:
+                <ul class="bulleted">
+                    <li class="bulleted">When writing a new <code>Promise</code> that should be resolved after other promises are resolved, nest your <code class="inline-code">resolve</code> function call 
+                    inside the <code class="inline-code">then</code> call of the other promises.</li>
+                </ul>
+            </p>
+            <p>
+                An example:
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    var firstPromise = // some promise
+    var secondPromise = // some other promise
+
+    // New user-defined Promise to resolve after the ones
+    var thirdPromise = new Promise(function(resolve, reject) {
+        let counter = 0;
+
+        firstPromise.then(function(result) {
+            counter++;
+            if (counter == 2) {
+                resolve('newPromise has been resolved!')
+            }
+        }).catch(onReject);
+
+        secondPromise.then(function(result) {
+            counter++;
+            if (counter == 2) {
+                resolve('newPromise has been resolved!')
+            }
+        }).catch(onReject);
+    });
+
+    thirdPromise.then(console.log)
+    // `newPromise has been resolved!` logs on the console</code>
+        </pre>
+        </div>
+        <p>
+           <ul class="bulleted">
+               <li class="bulleted">You don't know how long a promise will take to resolve</li>
+           </ul>
+           I have to keep reiterating this to myself since I keep forgetting it's true. Coming from a synchronous perspective, it's easy to get lulled into thinking:
+        </p>
+           <blockquote><code class="inline-code">firstPromise</code> resolves first because it's first, and <code class="inline-code">secondPromise</code> resolves second because it's second.</blockquote>
+        <p>
+            The implications of this in the code block above are that the condition <code class="inline-code">if (counter == 2)</code> has to be written in the <code class="inline-code">then</code> call 
+            for both promises.
+        </p>
+        <p>
+                <ul class="bulleted">
+                    <li class="bulleted">JSON.parse() accepts Buffers</li>
+                </ul>
+                This takeaway has less to do with promises, but I learned this nonetheless during one of the workshopper's challenges. A JSON object was received from a GET request and was to be logged in the console.
+                I was initially going to convert the Buffer to a String, but thought I should try it first as is, and it worked.
+        </p>
+        <h3>Takeaways from test-anything</h3>
+        <p>
+            <em>test-anything</em> was a shorter and less challenging workshopper, but still fruitful. The <code class="inline-code">tape</code> package was used for the challenges. Here are my key takeaways:
+            <ul class="bulleted">
+                <li class="bulleted">You can set how many tests are going to be done with <code class="inline-code">t.plan(numberOfTests)</code> before executing the tests.
+                If you do not, you must call <code class="inline-code">t.end</code> after the tests have ran. <code class="inline-code">t</code> is the test object that <code class="inline-code">require('tape')([name], [opts], cb)</code>provides
+                in the callback <code class="inline-code">cb</code>.</li>
+                <li class="bulleted">To test if a function called a callback, you can send a test method as a callback</li>    
+            
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    var test = require('tape');
+    var functionToTest = // function that takes a cb
+
+    test('Testing for callbacks', function(t) {
+        t.plan(1);
+        functionToTest(function() {
+            t.pass('Callback was called')
+        });
+
+    });</code>
+        </pre>
+        </div>
+        <li class="bulleted">You can test if a function did or did not throw an Error:</li> 
+    
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    var test = require('tape');
+    var functionToTest = // function that throws an error 
+    var noErrorValue = // value that does not cause an error
+    var errorCausingValue = // value that causes an error
+
+    test('Checking for exceptions', function(t) {
+        t.throws(function() {
+            functionToTest(errorCausingValue);
+        });
+
+        t.doesNotThrow(function() {
+            functionToTest(noErrorValue);
+        })
+
+    });</code>
+        </pre>
+        </div>
+    </ul>
+    <p>
+        I will have the opportunity to test my knowledge (pun intended) about <code class="inline-code">tape</code> this week as I finish the freeCodeCamp projects as well as attempt to 
+        contribute to the <a href="https://github.com/publiclab/image-sequencer/issues/546" target="_blank">Public Lab Image Sequencer repo</a>.
+    </p>
+    <h3>CodeSandbox is beautiful</h3>
+    <p>
+        I have not used CodeSandbox to write code, but have encountered it when reading through the <a href="https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/todos" target="_blank">
+        Todo List app</a> tutorial in the <a href="https://redux.js.org/basics/example" target="_blank">Redux docs</a>. I listened to another JS Party podcast today, <a href="https://changelog.com/jsparty/51" target="_blank">
+        #51: Come Play in the CodeSandbox</a> where host Nick Nisi interviewed CodeSandbox founder Ives van Hoorne. The talk was above my head most of the time, but I love Hoorne's goals, vision and philosophy
+        behind CodeSandbox. I was certainly excited and moved to try and use it for my projects after listening.
+    </p>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
