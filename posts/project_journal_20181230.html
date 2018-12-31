@@ -50,7 +50,7 @@
             <p><em>promise-it-wont-hurt</em> was a challenging but fantastic workshopper that walked through different aspects of Promises in JavaScript. Some key takeaways, besides the fundamentals that I won't bother
                 trying to write more effectively than <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">MDN</a>:
                 <ul class="bulleted">
-                    <li class="bulleted">When writing a new <code>Promise</code> that should be resolved after other promises are resolved, nest your <code class="inline-code">resolve</code> function call 
+                    <li class="bulleted">When writing a new <code class="inline-code">Promise</code> that should be resolved after other promises are resolved, nest your <code class="inline-code">resolve</code> function call 
                     inside the <code class="inline-code">then</code> call of the other promises.</li>
                 </ul>
             </p>
@@ -62,8 +62,12 @@
         <pre><code class="language-javascript">
     var firstPromise = // some promise
     var secondPromise = // some other promise
+    
+    function onReject() {
+        // error handler
+    }
 
-    // New user-defined Promise to resolve after the ones
+    // New user-defined Promise to resolve after other ones
     var thirdPromise = new Promise(function(resolve, reject) {
         let counter = 0;
 
@@ -145,14 +149,16 @@
 
         t.doesNotThrow(function() {
             functionToTest(noErrorValue);
-        })
+        });
+
+        t.end();
 
     });</code>
         </pre>
         </div>
     </ul>
     <p>
-        I will have the opportunity to test my knowledge (pun intended) about <code class="inline-code">tape</code> this week as I finish the freeCodeCamp projects as well as attempt to 
+        I will have the opportunity to test my knowledge (pun intended) about <code class="inline-code">tape</code> (and testing in general) this week as I finish the freeCodeCamp projects as well as attempt to 
         contribute to the <a href="https://github.com/publiclab/image-sequencer/issues/546" target="_blank">Public Lab Image Sequencer repo</a>.
     </p>
     <h3>CodeSandbox is beautiful</h3>
@@ -162,7 +168,10 @@
         #51: Come Play in the CodeSandbox</a> where host Nick Nisi interviewed CodeSandbox founder Ives van Hoorne. The talk was above my head most of the time, but I love Hoorne's goals, vision and philosophy
         behind CodeSandbox. I was certainly excited and moved to try and use it for my projects after listening.
     </p>
-        </div>
+    <br>
+    <br>
+    <br>
+</div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
 </body>
