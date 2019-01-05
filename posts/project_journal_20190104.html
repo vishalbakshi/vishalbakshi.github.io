@@ -22,18 +22,58 @@
     <main>
         <div id="content">
             <br>
-            <h2 class="title"></h2>
+            <h2 class="title">Project Journal: January 04, 2019 (Happy New Year!)</h2>
+            <h3>Completing a project</h3>
             <p>
+                I tend to be Captain Obvious most days of the week, so the following statement falls in line: it's a wonderful feeling to complete a project.
+                After much wrestling with MongoDB and Mocha, I was able to complete the <a href="https://vbakshi-isaq-project2.glitch.me/" target="_blank">
+                Project Issue Tracker</a> project on freeCodeCamp this week. And it was a wonderful feeling.
+            </p>
+            <p>
+                Main takeaways:
+            </p>
+            <br>
+            <h4>Using Mocha</h4>
+            <p>
+                It took a bit longer than desired for me to configure Mocha in order to run the required tests for the project. Essentially, I was having trouble 
+                resolving how to get the <code class="inline-code">suite</code> object available in my file. After a few rounds of Googling, I settled on the following 
+                lines:
             </p>
                 
         <div class="code-container">
         <pre><code class="language-javascript">
-
+    var Mocha  = require('mocha');
+    var mocha = new Mocha();
+    mocha.ui('tdd');
         </code>
         </pre>
         </div>
-        
+        <p>
+            Prior to that, I had been erroneously calling the <code class="inline-code">ui</code> method on the <code class="inline-code">Mocha</code> object. 
+            Additionally, specifying <code class="inline-code">tdd</code> makes <code class="inline-code">suite</code> available. From their
+            <a href="https://mochajs.org/#mochaopts" target="_blank">docs</a>:
+            <blockquote>
+                    <em>The BDD interface provides describe(), context(), it(), specify(), before(), after(), beforeEach(), and afterEach().</em>
+            </blockquote>
+            <br>
+            <blockquote>
+                    <em>The TDD interface provides suite(), test(), suiteSetup(), suiteTeardown(), setup(), and teardown():.</em>
+            </blockquote>
+        </p>
+        <br>
+        <h4>Satisfaction of test outputs</h4>
+        <p>
+            I have found testing to be, while frustrating at times due to the learning curve of these libraries, very comforting.
+            There is a savory level of certainty when you can see, in plain english, whether or not your code works. 
+            And that gives a boost of confidence when heading in to debug it. Finally leading up to a tangible sense of achievement when you
+            resolve the issues.
+        </p>
+        <p>
+            So on that note I'd like to leave this satisfying screenshot here:
+        </p>
+        <img src="../images/passedTestsIssueTracker.png">
         </div>
+
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
 </body>
