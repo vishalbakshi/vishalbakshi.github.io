@@ -36,7 +36,7 @@ h3 {
 }
 
 h4 {
-    color: cornflowerblue;
+    color: rgb(255, 136, 0);
     font-size: 1em;
     line-height: 10%;
 }
@@ -74,6 +74,10 @@ ul.bulleted {
     display: block;
 }
 
+ul.strong {
+    font-weight: bold;
+}
+
 ul.not-bulleted {
     list-style-type: none;
     display: inline;
@@ -82,7 +86,6 @@ ul.not-bulleted {
     text-align:center;
 
 }
-
 
 li.not-bulleted {
     display: inline;
@@ -93,6 +96,11 @@ li.not-bulleted {
 li.bulleted {
     padding-top: 10px;
 }
+
+li.strong {
+    font-weight: bold;
+}
+
 a:link {
     text-decoration: none;
     color: cornflowerblue;
