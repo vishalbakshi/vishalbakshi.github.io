@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 06, 2019</h2>
+            <p>
+                Things finally took off for my <a href="https://github.com/vishalbakshi/et130webapp" target="_blank">ET 130 Web App project</a>. 
+                The Eagles also took off and are flying into the divisional round after 
+                <a href="http://www.espn.com/nfl/game/_/gameId/401038954" target="_blank">beating the Bears</a>.
+            </p>
+            <h3>Fruitful efforts</h3>
+            <p>
+                I am quite pleased with my progress today, as I able to go through a few working iterations of the core functionality in a development environment.
+                The gif below shows the current functionality of my web app:
+                <img src="../images/20190106.gif">
+                The user can click <em>New Problem</em> and the fields above update to give the user a new problem and answer. The web app performs the following broad 
+                three steps:
+                <ul class="bulleted">
+                    <li class="bulleted">Create a new problem</li>
+                    <li class="bulleted">Create the corresponding answer</li>
+                    <li class="bulleted">Show it to the user</li>
+                </ul>
+            </p>
+            <h3>First attempt</h3>
+            <p>
+                I started out the day, and the project, with the following plan:
+                <ul class="bulleted">
+                    <li class="bulleted">Have a <code class="inline-code">json</code> file with practice problem information</li>
+                    <li class="bulleted">
+                        Read the <code class="inline-code">json</code> file into <code class="inline-code">server.js</code> 
+                        using <code class="inline-code">fs.readFile()</code></li>
+                    <li class="bulleted">Parse the <code class="inline-code">json</code> data into a <code class="inline-code">practiceProblem</code> object</li>
+                    <li class="bulleted">Calculate the answer and add it to the <code class="inline-code">practiceProblem</code> object</li>
+                    <li class="bulleted">Send the <code class="inline-code">practiceProblem</code> object into an <code class="inline-code">index.pug</code> template</li>
+                </ul>
+                
+            </p>
+            <p>
+                My <code class="inline-code">json</code> file contained the following structure:
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    {
+        "name": "practiceProblems.json",
+        "properties": [
+            {
+            "topic": "ShearStress",
+            "properties": {
+                "relevantFormulas": "tau = eta * delta_v / delta_y",
+                "problems": [
+                {
+                    "problemStatement": "What is the shear stress ...",
+                    "knownVariables": {
+                        "eta": ["2", "unit"],
+                        "delta_v": ["0.5", "unit"],
+                        "delta_y": ["10", "unit"]
+                    },
+                    "unknownVariable": "tau"
+                }
+                ]
+            }
+            }
+        ]
+        }   
+        </code>
+        </pre>
+        </div>
+            <p>
+                Since <code class="inline-code">json</code> may not be the easiest to read for humans, here was my logic for the structure:
+                <ul class="bulleted">
+                    <li class="bulleted">Each element in the <code class="inline-code">problems</code> Array contains the following properties:</li>
+                    <ul class="bulleted">
+                        <li class="bulleted"><code class="inline-code">problemStatement</code>: some string that states the problem</li>
+                        <li class="bulleted"><code class="inline-code">knownVariables</code>: 
+                            an object with variable name keys and associated [value, unit] values</li>
+                        <li class="bulleted"><code class="inline-code">unknownVariable</code>: some string of the unknown variable name</li>
+                    </ul>
+                </ul>
+            There can be many problems in the <code class="inline-code">problems</code> Array, and one <code class="inline-code">problems</code> Array
+            for each <code class="inline-code">topic</code>.
+            </p>
+            <br>
+            <h3>Calculating the answer</h3>
+            <p>
+                This flow worked okay, and was a great starting point since it helped me wrap my head around the problem. 
+                Once <code class="inline-code">server.js</code> brought this data in, it sent it off to a function I created 
+                called <code class="inline-code">ShearStress</code>:
+            </p>
+    
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    function ShearStress(knownVariables) {
+
+        // Extract variables from input and convert to Double
+        let eta = Number(knownVariables.eta[0]);
+        let delta_v = Number(knownVariables.delta_v[0]);
+        let delta_y = Number(knownVariables.delta_y[0]);
+        
+        // Calculate tau
+        let tau = (eta * delta_v) / delta_y;
+        
+        // get correct units of tau
+        if (knownVariables.delta_y[1] == "m") tauUnit = "Pa";
+        if (knownVariables.delta_y[1] == "ft") tauUnit = "lb/ft^2";
+        
+        return { tau: [tau, tauUnit] };
+    };
+        </code>
+        </pre>
+        </div>
+        <p>
+            The <code class="inline-code">ShearStress</code> function receives the <code class="inline-code">knownVariables</code> 
+            object, calculates the unknown variable <code class="inline-code">tau</code>, chooses the correct unit, and returns an 
+            Array <code class="inline-code">[tau, tauUnit]</code>.
+        </p>
+        <p>
+            The pug file then receives this data...
+        </p>
+    <div class="code-container">
+    <pre><code class="language-javascript">
+    // Send the problem object to index.pug
+    res.render("index", practiceProblem);
+    </code>
+    </pre>
+    </div>
+    <p>
+        ...and lays it out for me...
+    </p>
+    <div class="code-container">
+    <pre><code class="language-javascript">
+    html
+    head
+        title ET 130 Practice Problems
+    body 
+        h1 ET 130: Practice Problems
+        h2='Topic: ' + topic
+    
+        h3 Problem Statement
+        p=problemStatement
+    
+        h3 Known Variables
+        ul
+        each val, index in knownVariables
+            li=index + ' = ' + val[0] + ' ' + val[1]
+    
+        h3 Unknown Variable
+        ul
+        li=unknownVariable
+    
+        h3 Relevant Formulas
+        ul  
+        li=relevantFormulas
+    
+        h3 Answer
+        ul
+        each val, index in answer
+            li=index + ' = ' + val[0] + ' ' + val[1]
+    
+        a(href="/") New Problem
+    </code>
+    </pre>
+    </div>
+    <h3>Echoes of an earlier vision</h3>
+    <p>
+        I was elated to accomplish this functionality, but there were some 
+        early-state-of-project realities I had to deal with:
+        <ul class="bulleted">
+            <li class="bulleted">If I continued down this path, I would have to generate 
+                <code class="inline-code">problems</code> elements manually in my 
+                <code class="inline-code">practiceProblems.json</code>
+            </li>
+            <li class="bulleted">I initially had created the 
+                <code class="inline-code">practiceProblems.json</code> file as an emulation of a 
+                MongoDB document, but I don't think I'm going to get to that stage in my two-week version.
+            </li>
+        </ul>
+        <p>
+            So instead of getting my practice problems from my <code class="inline-code">json</code> file, 
+            I decided to create a <code class="inline-code">getProblem</code> function:
+        </p>
+        
+    <div class="code-container">
+    <pre><code class="language-javascript">
+function getProblem(unitSystem) {
+    // Initialize all variables
+    let eta, delta_v, delta_y;
+
+    // Assign random values and correct units based on unit system
+    if (unitSystem == "metric") {
+        eta = [0.001 + Math.random(), "Pa*s"];
+        delta_v = [Math.floor(Math.random() * 5 + 1), "m/s"];
+        delta_y = [Math.floor(Math.random() * 5 + 1), "m"];
+    }
+    
+    if (unitSystem == "imperial") {
+        eta = [0.00003 + Math.random(), "lb*s/ft^2"];
+        delta_v = [Math.floor(Math.random() * 15 + 1), "ft/s"];
+        delta_y = [Math.floor(Math.random() * 15 + 1), "ft"];
+    }
+    
+    // Build out the practiceProblem object
+    let practiceProblem = {
+        topic: "Shear Stress",
+        problemStatement: "What is the shear stress ...",
+        knownVariables: {
+            eta: eta,
+            delta_v: delta_v,
+            delta_y: delta_y
+        },
+        unknownVariable: "tau",
+        relevantFormulas: "tau = eta * delta_v / delta_y"
+    };
+
+    // Send it back
+    return practiceProblem;
+
+    };
+    </code>
+    </pre>
+    <p>
+        Thus, the server's <code class="inline-code">get</code> route was simplified:
+    </p>
+    <div class="code-container">
+    <pre><code class="language-javascript">
+app.route("/").get(function(req, res) {
+
+    let unitSystems = ["metric", "imperial"];
+    let unitSystemsIndex = Math.floor(Math.random() * 2);
+    let unitSystem = unitSystems[unitSystemsIndex];
+    
+    if (getProblem(unitSystems[unitSystemsIndex])) {
+        practiceProblem = getProblem(unitSystem);
+        practiceProblem.answer = ShearStress(practiceProblem.knownVariables);
+    }
+    
+    // Send the problem object to index.pug
+    res.render("index", practiceProblem);
+
+});
+    </code>
+    </pre>
+    </div>
+    <p>
+        In case the server couldn't get the <code class="inline-code">practiceProblem</code> from 
+        <code class="inline-code">getProblem</code>, I created a default problem that was 
+        initialized and defined inside <code class="inline-code">server.js</code>.
+    </p>
+    <h3>Unit tests for values and units</h3>
+    <p>
+        I continue to enjoy writing tests, as they allow my understanding of the code to catch up to 
+        speed before I continue making the next feature in my web app.
+    </p>
+    <p>
+        I wrote tests which passed for the following:
+    </p>
+    <ul class="bulleted">
+        <li class="bulleted"><code class="inline-code">ShearStress()</code></li>
+        <ul class="bulleted">
+            <li class="bulleted">is a function</li>
+            <li class="bulleted">returns an object</li>
+            <li class="bulleted">return object has `tau` key</li>
+            <li class="bulleted">return object[`tau`] is an array</li>
+            <li class="bulleted">returns correct value of metric and imperial `tau`</li>
+            <li class="bulleted">returns correct unit of metric and imperial `tau`</li>
+        </ul>
+        <li class="bulleted"><code class="inline-code">getProblem()</code></li>
+        <ul class="bulleted">
+            <li class="bulleted">is a function</li>
+            <li class="bulleted">returns an object</li>
+            <li class="bulleted">return object has `topic`,
+                `problemStatement`,
+                `knownVariables`,
+                `unknownVarialble`,
+                and `relevantFormulas` keys</li>
+            <li class="bulleted">return object has correct <code class="inline-code">typeof</code> values</li>
+            <li class="bulleted">return object has correct metric or imperial values</li>
+            <li class="bulleted">return object has correct metric or imperial units</li>
+        </ul>
+    </ul>
+    <p>
+        The next task is writing functional tests before I can move on to adding more functionality.
+    </p>
+    <h3>Trello boardin'</h3>
+    <p>
+        I was pretty happy that Trello allows users to create an account for free as I was able to create 
+        a <a href="https://trello.com/b/r5cRy1VW/et130webapp" target="_blank">board for this project</a>:
+    </p>
+    <img src="../images/et130webapp_trelloboard1.png">
+    <p>
+        Currently I am using the following workflow:
+        <ul class="bulleted">
+            <li class="bulleted"><em>Things to do</em>: start here with two-week version related tasks only</li>
+            <li class="bulleted"><em>Doing</em>: one or more tasks (files) that I'm currently working on</li>
+            <li class="bulleted"><em>Things to test</em>: All tasks wait here while I'm <strong>doing</strong> their corresponding testing task</li>
+            <li class="bulleted"><em>Tests passed</em>: all passed tests for <strong>Things to test</strong> go here</li>
+            <li class="bulleted"><em>Done</em>: once tests pass, <strong>Things to test</strong> gets dumped into here</li>
+        </ul>
+    </p>
+    <p>
+        This will help me focus on <code class="inline-code">server.js</code>, <code class="inline-code">index.pug</code> and 
+        one <code class="inline-code">topic</code> in a given cycle.
+    </p>
+    </div>
+    <h3>freeCodeCamp podcast</h3>
+    <p>
+        I switched up again <em>*gasps again*</em> and listened to a freeCodeCamp podcast today, 
+        <a href="https://freecodecamp.libsyn.com/ep-49-sacha-greif-designer-developer-and-open-source-creator" 
+        target="_blank">Ep 50 - Sacha Greif, designer, developer, and open source creator</a>. I'm only an hour 
+        or so into the episode, but am thoroughly enjoying both Quincy Larson's interviewing style, and Sacha Greif's 
+        anecdotes. 
+    </p>
+    <h3>Dog chef Bakshi</h3>
+    <p>
+        In an effort to create a healthier diet for our dog, we have decided to start introducing homemade food 
+        in addition to his other regularly scheduled meal contents. I made the following today using our relatively 
+        new food processor, and took this sweet pic:
+    </p>
+    <img src="../images/homemadedogfood.jpg">
+    <p>
+        Here's the recipe:
+        <ul class="bulleted">
+            <li class="bulleted">Chop up chicken breasts into 1-2 inch cube-like pieces</li>
+            <li class="bulleted">Saut&eacute; the chicken</li>
+            <li class="bulleted">Chop some veggies (spinach, carrots, and zucchini)</li>
+            <li class="bulleted">Food process the veggies</li>
+            <li class="bulleted">Food process the chicken separately</li>
+            <li class="bulleted">Combine in a bowl and refridgerate or freeze based on chicken's expiry date</li>
+        </ul>
+    </p>
+    <p>
+        We chose to keep a 1 part veggies : 2 part chicken ratio in order to keep it protein-heavy per serving.
+    </p>
+    <br>
+    <br>
+    <br>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
