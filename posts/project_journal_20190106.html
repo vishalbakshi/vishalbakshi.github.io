@@ -130,11 +130,11 @@
         </div>
         <p>
             The <code class="inline-code">ShearStress</code> function receives the <code class="inline-code">knownVariables</code> 
-            object, calculates the unknown variable <code class="inline-code">tau</code>, chooses the correct unit, and returns an 
-            Array <code class="inline-code">[tau, tauUnit]</code>.
+            object, calculates the unknown variable <code class="inline-code">tau</code>, chooses the correct unit, and returns an object 
+            with <code class="inline-code">tau</code> key and corresponding <code class="inline-code">[tau, tauUnit]</code> value.
         </p>
         <p>
-            The pug file then receives this data...
+            The <code class="inline-code">pug</code> file then receives this data...
         </p>
     <div class="code-container">
     <pre><code class="language-javascript">
@@ -195,7 +195,7 @@
             </li>
         </ul>
         <p>
-            So instead of getting my practice problems from my <code class="inline-code">json</code> file, 
+            So instead of getting my practice problems from a <code class="inline-code">json</code> file, 
             I decided to create a <code class="inline-code">getProblem</code> function:
         </p>
         
