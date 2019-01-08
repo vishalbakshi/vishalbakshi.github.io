@@ -142,6 +142,16 @@ img {
     border-radius: 15px;
 }
 
+img.small {
+    display: block;
+    width: 40%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: auto;
+    border-radius: 15px;
+
+}
+
 .code-container {
     display: block;
     margin-top: 5%;
@@ -162,7 +172,7 @@ code.inline-code {
 blockquote {
     font-size: 0.9em;
     margin: auto;
-    width: 80%;
+    width: auto;
     background: #eee;
     border-radius: 5px;
     padding: 15px;

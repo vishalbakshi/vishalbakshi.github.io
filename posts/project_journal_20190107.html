@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 7, 2019</h2>
+            <p>
+                Today was a solid (althought not as much as yesterday) day of progress. I came across some core concept questions regarding 
+                testing with <code class="inline-code">chai</code> and rendering with <code class="inline-code">pug</code>.
+            </p>
+            <h3>Dysfunctional functional tests</h3>
+            <p>
+                The next task on my board was to write and pass functional tests for the <code class="inline-code">'/'</code> route's 
+                <code class="inline-code">GET</code> request.
+            </p>
+            <p>
+                In the previous small projects I had created, I was used to checking all my requests with some returned JSON. This is the first time 
+                where I was writing a test for a request that resulted in a rendered page with no other response.
+            </p>
+            <p>
+                I haven't quite figured out what exactly I should test when sending a GET request to <code class="inline-code">'/'</code>, but 
+                this is what I chose to stick with for today:
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    test("GET response contains correct page headers", function(done) {
+        chai
+            .request("http://localhost:8080")
+            .get("/")
+            .end(function(err, res) {
+                assert.equal(res.status, 200, "Response status should be 200");
+                assert.include(res.text, "Topic");
+                assert.include(res.text, "Problem Statement");
+                assert.include(res.text, "Known Variables");
+                assert.include(res.text, "Unknown Variable");
+                assert.include(res.text, "Known Variables");
+                assert.include(res.text, "Relevant Formulas");
+                assert.include(res.text, "Answer");
+                done();
+            });
+    });
+        </code></pre></div>
+        <p>
+            I tested for an <code class="inline-code">ok</code> response, and then checked if <code class="inline-code">res.text</code>, which 
+            contained a string of HTML to be rendered in the browser, had each of the headers that were expected.
+        </p>
+        <br>
+        <p>
+            Yuck. 
+        </p>
+        <br>
+        <p>    
+            Or maybe this is how these tests should go? I can't imagine that to be the case. I don't think testing for static text values says 
+            much about the functionality of my code, but then again, it does test the functionality that my server serves data that then results 
+            in a page rendered with some expected text.       
+        </p>
+        <p>
+            Clearly, I have to learn more about testing a scenario such as this. 
+        </p>
+        <br>
+        <h3>Project #2 takes off</h3>
+        <p>
+            I began working on my second two-week project today: <a href="https://github.com/vishalbakshi/ThoughtBoard" target="_blank">ThoughtBoard</a>. 
+            I started by creating a <a href="https://trello.com/b/aOagyDeB/thoughtboard" target="_blank">Trello board</a> for my project, 
+            with some basic tasks: 
+            <ul class="bulleted">
+                <li class="bulleted"><em>Create basic "Hello World" server.js</em></li>
+                <li class="bulleted"><em>Add sandbox.config.json to repo</em></li>
+                <li class="bulleted"><em>Import GitHub repo  into Codesandbox</em></li>
+            </ul>
+        </p>
+        <br>
+        <h4>Deeper questions</h4>
+        <p>
+            I am exerting a conscious effort to be mindful of my vision and scope for these projects and slapping on the two-week deadline helps.
+            I don't want to spend time on edge cases while the core functionality remains unexplored. So I started <em>Doing</em> the following tasks first:
+            <ul class="bulleted">
+                <li class="bulleted">Review README.md contents</li>
+                <li class="bulleted">Determine the most important element of this app</li>
+            </ul>
+        </p>
+        <p>
+            As a reminder, the core functionality for this project is:
+        </p>
+            <blockquote><em>Allow user to write down and then iteratively categorize and group their thoughts</em></blockquote>
+        <p>
+            I'm still struggling to wrap my head around this web app's core functionality, but I came up with three discrete and separate features 
+            to explain it:
+        </p>
+        <ul class="bulleted">
+            <li class="bulleted">Write down your thoughts > Most important</li>
+            <li class="bulleted">Categorize them > Next most important</li>
+            <li class="bulleted">Group them > Next most important</li>
+            <li class="bulleted">Categorize and group thoughts iteratively > Next most important</li>
+        </ul>
+        <br>
+        <h4>Take 1: Static page</h4>
+        <p>
+            Following the steps above, I completed the following task:
+            <ul class="bulleted">
+                <li class="bulleted">Serve a static <code class="inline-code">index.html</code> where user can
+                    <code class="inline-code">POST</code> `thought` text and a `category` text</li>
+            </ul>
+            Which resulted in the following page:
+            <img class="small" src="../images/indexHtml.png">
+        </p>
+        <p>
+            Okay that's awesome---I could type text, select a category, and submit both. This essentially took care of <em>Write down your thoughts</em> as well 
+            as <em>Categorize them</em>.
+        </p>
+        <br>
+        <h4>Take 2: put it in a pug</h4>
+        <p>
+            Tackling the next feature, <em>Group them</em>, would require some storage and iteration. Since I'm keeping things pretty rough draft for today, 
+            I chose to store <code class="inline-code">POST</code> body fields in an <code class="inline-code">object</code> in <code class="inline-code">server.js</code>
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    // server.js 
+
+    let thoughts = {};
+
+    app.route('/')
+       .post(function(req, res) {
+        
+            // There's probably a JS equivalent of python's `setDefault`
+            if (!thoughts[req.body["category"]]) {
+                thoughts[req.body["category"]] = [req.body["thought"]];
+            } else {
+                thoughts[req.body["category"]].push(req.body["thought"]);
+            };
+
+            res.redirect("/");
+    });
+        </code></pre></div>
+        <p>
+            <code class="inline-code">`category`</code> keys would have a corresponding array full of <code class="inline-code">`thoughts`</code>, such as the following:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    // the value of `thoughts` after a few form submissions
+
+    {
+        'Category 1': [ 'Thought 1', 'Thought 2' ],
+        'Category 2': [ 'Thought 1', 'Thought 2'],
+        'Category 3': [ 'Thought 1' ]
+    }
+        </code></pre></div>
+        <p>
+            The <code class="inline-code">index.pug</code> file contained the following logic:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    each val, index in thoughts
+        ul
+            li=index
+            each thought in val
+                ul
+                    li=thought
+        </code></pre></div>
+        <p>
+            This resulted in the following functionality:
+            <img src="../images/20190107.gif">
+        </p>
+        <p>
+            Not bad! I achieved a minimal version of the three features since the user could write down their thoughts, categorize them, and group them by category. 
+            I want to jump in and start figuring out how to allow the user to do this iteratively, but before that can happen, I want to write unit and functionality 
+            tests for what I have so far.
+            <br>
+            <br>
+            <br>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
