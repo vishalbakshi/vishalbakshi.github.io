@@ -143,7 +143,7 @@
     app.route('/')
        .post(function(req, res) {
         
-            // There's probably a JS equivalent of python's `setDefault`
+            // There's probably a JS equivalent of python's `setdefault`
             if (!thoughts[req.body["category"]]) {
                 thoughts[req.body["category"]] = [req.body["thought"]];
             } else {
