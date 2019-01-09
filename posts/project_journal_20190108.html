@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 8, 2019</h2>
+            <p>
+                I had another solid day, which is pretty fantastic.
+            </p>
+            <h3>Testing form functionality</h3>
+            <p>
+                I wrote and passed the functional test for my <a href="https://github.com/vishalbakshi/ThoughtBoard" target="_blank">
+                ThoughtBoard</a> project. This time, it was a more intuitive experience, as <code class="inline-code">chai</code> has an awesome 
+                <code class="inline-code">form</code> method. 
+            </p>
+            <p>
+                The goal was to test that a <code class="inline-code">POST</code> would correctly send the form data, which the server would render 
+                onto <code class="inline-code">index.pug</code>.
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+test("POST request responds with correct data", function(done) {
+    chai
+        .request("http://localhost:8080")
+        .post("/")
+        .type("form")
+        .send({
+            // Sample form data
+            thought: "test_thought",
+            category: "test_category"
+
+        })
+        .end(function(err, res) {
+
+            // Status is OK
+            assert.equal(res.status, 200, 
+                "Response status should be 200");
+
+            // `thought` will be rendered
+            assert.include(res.text, 
+                "test_thought");
+
+            // `category` will be rendered
+            assert.include(res.text, 
+                "test_category");
+            done();
+        });
+    });
+        </code></pre></div>
+        <p>
+            I browsed the web for better/best practices on testing data-to-be-rendered but only found some examples where 
+            they had done something similar to what I've done. The idea of testing <code class="inline-code">res.text</code> 
+            does not sit well, so I'll keep looking.
+        </p>
+        <h3>Number three takes off</h3>
+        <p>
+            I kicked off my third project, <a href="https://github.com/vishalbakshi/FeelsTracker" target="_blank">FeelsTracker</a>, 
+            and feel really good about my progress on it today. As a refresher, here was the original core functionality and 
+            motivation:
+        </p>
+        <ul class="bulleted">
+            <li class="bulleted">What is the task that is impossible to do manually?</li>
+            <ul class="bulleted">
+                <li class="bulleted">Remember exactly what emotion you felt, and when you felt it, over time</li>
+            </ul>
+            <li class="bulleted">Core Functionality</li>
+            <ul class="bulleted">
+                <li class="bulleted">Users can record what emotion they are feeling at a given time</li>
+            </ul>
+        </ul>
+        <p>
+            I made a great headstart just by deciding on using a simple form as the initial app, allowing me to use a good amount 
+            of code and lessons-learned from the ThoughtBoard project.
+        </p>
+        <p>
+            This was the result of the first round of the app today:
+        </p>
+        <img src="../images/20190108A.gif">
+        <p>
+            The user has a list of emotions they can choose from, and a submit button to send that emotion back for the server to record 
+            with today's date. 
+        </p>
+        <p>
+            The particular list of emotions I chose to use come from one interpretation of 
+            <a href="https://en.m.wikipedia.org/wiki/Robert_Plutchik" target="_blank">Plutchik's Wheel of Emotions</a>:
+        </p>
+        <img src="../images/plutchikswheel.png">
+        <p>
+            This is one of my favorite graphics to understand the human condition: a palette of intersecting emotions around the circumference, with the intensity 
+            of the emotion increasing as you get closer to the center radially. Let us observe how this wheel works:
+        </p>
+        <ul class="bulleted">
+            <li class="bulleted"><strong>aggressiveness</strong> + <strong>optimism</strong>  = <strong style="color:rgb(255, 168, 137);">interest</strong></li>
+            <ul class="bulleted">
+                <li class="bulleted"><strong style="color:rgb(255, 68, 0);">vigilance</strong> is a stronger, more concentrated flavor of <strong style="color:rgb(255, 168, 137);">interest</strong></li>
+            </ul>
+        </ul>
+        <p>
+            Ugh, that's beautiful. Let's do a couple more:
+        </p>
+        <ul class="bulleted">
+                <li class="bulleted"><strong>submission</strong> and <strong>awe</strong> yield <strong style="color: rgb(94, 194, 119);">apprehension</strong></li>
+                <li class="bulleted">but <strong>disapproval</strong> and <strong>awe</strong> yield <strong style="color: rgb(43, 135, 255)">distraction</strong></li>
+        </ul>
+        <p>
+            Dang. The elegance! Okay one more:
+        <ul class="bulleted">
+            <li class="bulleted"><strong style="color:rgb(82, 139, 82);">admiration</strong> is a deeper level of <strong style="color: lightgreen;">acceptance</strong></li>
+        </ul>
+        </p>
+        <p>Looove it! 
+        </p> 
+        <br>
+        <h4>Reconfiguring the core functionality statement</h4>
+        <p>
+            Similar to the ThoughtBoard project, I'm using local storage for now. The next round of coding 
+            brought the <code class="inline-code">userEmotions</code> object into the picture, where the server would store 
+            <code class="inline-code">emotion</code> keys and an <code class="inline-code">emotionDate</code> Array:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+app
+    .route("/")
+    .get(function(req, res) {
+        // `emotions` is a String Array
+        // `userEmotions` is an object
+        res.render("index", { emotions: emotions, 
+            userEmotions: userEmotions });
+    })
+    .post(function(req, res) {
+        // Parse form submitted emotion
+        // Initialize current time Date()
+        let newEmotion = req.body.emotion;
+        let emotionDate = new Date().toDateString();
+
+        // Create or append emotionDate to given emotion
+        if (!userEmotions[newEmotion]) {
+            userEmotions[newEmotion] = [emotionDate];
+        } else {
+            userEmotions[newEmotion].push(emotionDate);
+        }
+
+        res.redirect("/");
+    });       
+        </code></pre></div>
+        <p>
+            My <code class="inline-code">index.pug</code> would iterate through <code class="inline-code">emotions</code> 
+            and <code class="inline-code">emotionDate</code> values:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    each index, val in userEmotions
+    ul 
+        li=val 
+        each date in index
+        ul 
+            li=date            
+        </code></pre></div>
+        <p>
+            To produce the following result:
+        </p>
+        <img src="../images/20190108B.gif">   
+        <h4>Updating the core functionality statement's language</h4>
+        <p>
+            At this point I felt accomplished. The user could select an emotion they were feeling, submit it, 
+            and view it. They could also see emotions and dates.
+        </p>
+        <p>
+            While my app was functioning well, my core functionality statement turned out to be coming up short:
+        </p>
+        <blockquote><em>Users can record what emotion they are feeling at a given time</em></blockquote>
+        <p>
+            This did not capture the essence of the impossible manual task this app would perform--allow 
+            the user to <em>remember</em> exactly what they felt and when. 
+        </p>
+        <p>
+            In other words, from the context of the app's functionality, my core functionality statement covered 
+            the form's <code class="inline-code">POST</code> request, but not the server's response and rendering.
+        </p>
+        <p>
+            Thus, I updated my core functionality statement with the following:
+        </p>
+        <blockquote><em>Users can record what emotion they are feeling at a given time and then view those records later on</em></blockquote>
+        <br>
+        <br>
+        <br>
+        <p>
+            Tomorrow I will write tests...
+        </p>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
