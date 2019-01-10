@@ -30,10 +30,10 @@
             <p>
                 I wrote and passed the functional test for my <a href="https://github.com/vishalbakshi/ThoughtBoard" target="_blank">
                 ThoughtBoard</a> project. This time, it was a more intuitive experience, as <code class="inline-code">chai</code> has an awesome 
-                <code class="inline-code">form</code> method. 
+                <code class="inline-code">type</code> method. 
             </p>
             <p>
-                The goal was to test that a <code class="inline-code">POST</code> would correctly send the form data, which the server would render 
+                The goal was to test if a <code class="inline-code">POST</code> would correctly send the form data, which the server would render 
                 onto <code class="inline-code">index.pug</code>.
             </p>
                 
@@ -79,11 +79,11 @@ test("POST request responds with correct data", function(done) {
             motivation:
         </p>
         <ul class="bulleted">
-            <li class="bulleted">What is the task that is impossible to do manually?</li>
+            <li class="bulleted"><em>What is the task that is impossible to do manually?</em></li>
             <ul class="bulleted">
                 <li class="bulleted">Remember exactly what emotion you felt, and when you felt it, over time</li>
             </ul>
-            <li class="bulleted">Core Functionality</li>
+            <li class="bulleted"><em>Core Functionality</em></li>
             <ul class="bulleted">
                 <li class="bulleted">Users can record what emotion they are feeling at a given time</li>
             </ul>
@@ -97,8 +97,7 @@ test("POST request responds with correct data", function(done) {
         </p>
         <img src="../images/20190108A.gif">
         <p>
-            The user has a list of emotions they can choose from, and a submit button to send that emotion back for the server to record 
-            with today's date. 
+            The user has a list of emotions they could choose from, and a submit button to send that emotion back for the server to record. 
         </p>
         <p>
             The particular list of emotions I chose to use come from one interpretation of 
@@ -106,7 +105,7 @@ test("POST request responds with correct data", function(done) {
         </p>
         <img src="../images/plutchikswheel.png">
         <p>
-            This is one of my favorite graphics to understand the human condition: a palette of intersecting emotions around the circumference, with the intensity 
+            This is one of my favorite graphics about the human experience: a palette of intersecting emotions around the circumference, with the intensity 
             of the emotion increasing as you get closer to the center radially. Let us observe how this wheel works:
         </p>
         <ul class="bulleted">
@@ -204,9 +203,6 @@ app
         <br>
         <br>
         <br>
-        <p>
-            Tomorrow I will write tests...
-        </p>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
