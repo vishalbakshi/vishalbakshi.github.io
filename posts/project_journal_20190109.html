@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 9, 2019</h2>
+            <p>
+                BART commutes allow time to work on your laptop if you can find a seat. If not, you can still read/type something 
+                on your phone. But if there are delays, and trains are packed, you pretty much find the one spot where you can look 
+                without making eye contact with your 6-inch-close neighbors. I was in between the last two modes of existence during my 
+                commutes.
+            </p>
+            <h3>Slow progress is progress?</h3>
+            <p>
+                The problem incurred by building momentum is having to maintain it. This is when I tamper expectations for the current day 
+                and get the minimum amount of work done to keep some semblance of pace.
+            </p>
+            <p>
+                I completed at least one task on each of my three projects today, and they were short and sweet so I'll have today's post 
+                follow suit:
+            </p>
+            <br>
+            <h4>et130webapp</h4>
+            <p>
+                It was really fun to work on this one today. I bore the positive fruits of how I setup my files initially. I added a 
+                new topic to the problem generator as well as created and passed both unit and functional tests for it. I was able to reuse 
+                much of my code from the first topic (<em>Shear Stress</em>), and will continue to create templates when the right opportunities arise.
+            </p>
+            <p>
+                The topic added is the linear Pressure-Height relationship existing in static continuous bodies of fluids, such as a tank 
+                of water that is still. Here it is in action:
+            </p>
+            <img class="small" src="../images/20190109A.gif">
+            <br>
+            <h4>ThoughtBoard</h4>
+            <p>
+                I started today chewing on this task for a bit:
+            </p>
+            <img class="small" src="../images/20190109A.png">
+            <p>
+                The decision was:
+            
+            <ul class="bulleted">
+                <li class="bulleted">Allow user to edit a category</li>
+                <li class="bulleted">Allow user to edit a thought</li>
+            </ul>
+            </p>
+            <p>
+                This stayed true to the core functionality statement, since it would start to unpack the <em>iterative</em> 
+                functionality. I played around with form elements in the <code class="inline-code">index.pug</code> template without much 
+                success, so I chose to take the <code class="inline-code">contenteditable</code> attribute for a spin:
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    // `thoughts` is an object with {category: thought} pairs
+    each val, index in thoughts
+        ul 
+            li
+            div(contenteditable = "true" value=index)=index
+            ul
+                each thought in val
+                li
+                    div(contenteditable="true" value=thought)=thought
+</code></pre></div>
+        <p>
+            The result was as follows:
+        </p>
+        <img class="small" src="../images/20190109B.gif">
+        <p>
+            There's much to be said about if this path will lead me to fulfilling the <em>iterative</em> grouping/categorizing 
+            functionality--we'll find out soon!
+        </p>
+        <br>
+        <h4>FeelsTracker</h4>
+        <p>
+            I wrote and passed the first functional test for this app, which was very similar to that for the ThoughtBoard, since 
+            they both are currently using forms:
+        </p>
+
+        <div class="code-container">
+        <pre><code class="language-javascript">
+
+    test("POST request responds with correct data", function(done) {
+
+        chai
+            .request("http://localhost:8080")
+            .post("/")
+            .type("form")
+            .send({
+                emotion: "test_emotion"
+            })
+            .end(function(err, res) {
+
+                // This way of creating a Date for testing
+                // may not work if format changes
+                let emotionDate = new Date().toDateString();
+
+                assert.equal(res.status, 200, "Response status should be 200");
+                assert.include(res.text, "test_emotion");
+                assert.include(res.text, emotionDate);
+                done();
+            });
+    });
+        </code></pre></div>
+        <p>
+            I'm looking to continue with a greater zeal tomorrow and the next few days so that I set myself up well for the 
+            second week of these projects.
+        </p>
+        <br>
+        <br>
+        <br>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
