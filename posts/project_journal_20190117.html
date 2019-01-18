@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 17, 2019</h2>
+            <p>
+                The past week was full of events. One unpleasant, the rest of them good.
+            </p>
+            <p>
+                Let's get the unpleasantness out of the way: <a href="https://www.youtube.com/watch?v=KhbA8ocLe7c&feature=onebox" target="_blank">the Eagles lost in the divisional round.</a>
+                To ease the pain, it was pretty heartwarming to see this <a href="https://sports.yahoo.com/alshon-jeffery-surprises-2nd-grader-wrote-supportive-letter-visit-classroom-211857680.html" target="_blank">fan (chain) reaction.</a>
+            </p>
+            <p>
+                My projects, on the other hand, ended up surging forward to the finish line. I had two significant waves of tasks that I 
+                have completed thus far this week:
+            </p>
+            <h3><a href="https://codesandbox.io/s/github/vishalbakshi/et130webapp" target="_blank">et130webapp</a></h3>
+            <p>
+                I added the logic for all of the main formulas students will be learning throughout the course, wrote the associated unit tests, and 
+                passed them! This was empowering, as I now feel like my two-week version is reasonable enough to finish. There is one more main functionality 
+                that I would like to add, which is for the user to be able to select the topic from a dropdown, and have the page refresh accordingly. I may wrap 
+                my functions into a single master function/controller that executes the switching based on the user's selection.
+            </p>
+            <p>
+                If time permits (and I may push my "two-week" timeframe to include MLK Day) I would also like to clean up the formatting of the page, since 
+                it gets quite cluttered for problems with many variables:
+            </p>
+            <img class="small" src="../images/20190117A.gif">
+            <p>
+                But that's lower priority than getting the other two projects up to speed.
+            </p>
+            <h3><a href="https://codesandbox.io/s/github/vishalbakshi/et130webapp" target="_blank">ThoughtBoard</a></h3>
+            <p>
+                This project was stalling until today. My original attempt resulted in the following:
+            </p>
+            <img class="small" src="../images/20190109B.gif">
+            <p>
+                However, there were some obvious flaws to this approach:
+            </p>
+            <ul class="bulleted">
+                <li class="bulleted">There was too much emphasis on the user iteratively updating the text, which was not emphasized in the Core Functionality for this project</li>
+                <li class="bulleted">My mind kept wandering towards implementations of jQuery in order to send back updates to the server. And while I don't think that's 
+                    a bad idea, I didn't think my project was so complex that it required that, especially since I was already using a template engine and, as it turns out, I was not maximizing 
+                    its utility
+                </li>
+                <li class="bulleted">The path to implementing the Core Functionality of iteratively categorizing and grouping thoughts was unclear</li>
+            </ul>
+            <p>
+                So I chose another approach, and branched off the main repo.
+            </p>
+            <br>
+            <h4>Form follows functionality</h4>
+            <p>
+                When I first hit the dead end with that first attempt, I wondered if using a form with dropdowns was restricting the functionality. 
+                And I found out that while there's nothing wrong with dropdowns, there's also nothing wrong with checkboxes!
+            </p>
+            <p> 
+                The user could add thoughts to the screen via form input, and they presented themselves with an associated checkbox:
+            </p>
+            <img class="small" src="../images/20190117B.gif">
+            <p>
+                They could then add Categories in a similar fashion, and they populated in the dropdown list one at a time:
+            </p>
+            <img class="small" src="../images/20190117C.gif">
+            <p>
+                They can then assign Categories to one or more thoughts, with the list of thoughts grouping by category each time:
+            </p>
+            <img class="small" src="../images/20190117D.gif">
+            <p>
+                And iteratively re-categorize the thoughts, which would regroup by category upon each submission:
+            </p>
+            <img class="small" src="../images/20190117E.gif">
+            <p>
+                I'm going to sit on it for tonight, but I think this covers the Core Functionality of this project.
+            </p>
+            <h3><a href="https://codesandbox.io/s/github/vishalbakshi/feelstracker" target="_blank">FeelsTracker</a></h3>
+            <p>
+                This is the last project I have to bring up to speed, and I hope to do so in the next few days. The last I worked on this project, 
+                it allowed the user to select and submit an emotion, which then was listed on the same page, ordered by date. Not much more to be said, 
+                but much more to be done.
+            </p>
+            <h3>Another fcc project bites the dust!</h3>
+            <p>
+                I finished the third of five project in the last freeCodeCamp certification this week. The project, titled 
+                <a href="https://vbakshi-isaq-project3.glitch.me/" target="_blank">Personal Library</a>, allowed the user to CRUD books, and comments to books, 
+                to a MongoDB database. This code had a significant amount of client-side code written by fcc, and that added a layer of planning/debugging that 
+                ended up in a much richer experience for me. There were some opportunies to read some AJAX documentation, which clarified some of those topics which 
+                I had previously left misunderstood. I have two more projects to go, and I assume it will take the greater part of the next few weeks 
+                to accomplish.
+            </p>
+            <h3>More podcast episodes</h3>
+            <p>
+                I have listened to quite a few podcast episodes this past week, all from freeCodeCamp's podcast:
+            </p>
+            <ul class="bulleted">
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-49-lyle-troxell-software-engineer-at-netflix-and-radio-show-host" target="_blank" 
+                >Episode 49: Lyle Troxell</a></li>
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-48-ali-spittel-creator-of-zen-of-programming" target="_blank" 
+                >Episode 48: Ali Spittel</a>, afterwhich I signed up on <a href="https://dev.to/vishalbakshi">dev.to</a></li>
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-47-laurence-bradford-interview-with-the-creator-of-learntocodewithme" target="_blank" 
+                >Episode 47: Laurence Bradford</a>, afterwhich I signed up for some of her email-lessons</li>
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-46-alexander-kallaway-interview-with-the-creator-of-100daysofcode" target="_blank" 
+                >Episode 46: Alexander Kallaway</a></li>
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-45-dropout-turned-software-engineer-dylan-israel-developer-interview" target="_blank" 
+                >Episode 45: Dylan Israel</a></li>
+                <li class="bulleted"><a href="https://freecodecamp.libsyn.com/ep-30-craigslist-wikipedia-and-the-abundance-economy" target="_blank" 
+                >Episode 30: Craigslist, Wikipedia, and the Abundance Economy</a>, which made we want to be a nicer person</li>
+
+            </ul>
+       
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+
+        </code></pre></div>
+        
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
