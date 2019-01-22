@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+
+ <g class="layer">
+  <title>Layer 1</title>
+  <circle cx="423" cy="222" fill="#FF0000" id="svg_10" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="396.64" cy="158.36" fill="#FF0000" id="svg_12" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="333" cy="312" fill="#FF0000" id="svg_13" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="274.000003" cy="285.64" fill="#FF0000" id="svg_14" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="333" cy="132" fill="#FF0000" id="svg_15" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="243" cy="222" fill="#FF0000" id="svg_16" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="396.64" cy="285.64" fill="#FF0000" id="svg_17" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <circle cx="269.36" cy="158.36" fill="#FF0000" id="svg_18" opacity="0.5" r="90" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0"/>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_23" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 7.01389 4.34091)" x="288" xml:space="preserve" y="113">optimistic</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_26" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 27.0139 24.3409)" x="362.057157" xml:space="preserve" y="92.047611">love</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_27" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 47.0139 44.3409)" x="411.428596" xml:space="preserve" y="141.285725">submission</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_28" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 67.0139 64.3409)" x="386.742877" xml:space="preserve" y="211.476229">awe</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="8" id="svg_29" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 87.0139 84.3409)" x="303.428574" xml:space="preserve" y="264.904821">disapproval</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_30" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 107.014 104.341)" x="184.114265" xml:space="preserve" y="246.047671">remorse</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_31" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 127.014 124.341)" x="99.771391" xml:space="preserve" y="149.666681">contempt</text>
+  <text fill="#ffffff" font-family="Sans-serif" font-size="9" id="svg_32" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" text-anchor="middle" transform="matrix(0.972222 0 0 0.954545 147.014 144.341)" x="74.057101" xml:space="preserve" y="35.47616">aggressiveness</text>
+ </g>
+</svg>
