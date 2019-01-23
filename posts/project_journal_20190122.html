@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 22, 2019</h2>
+            <p>
+                I made some modest but significant progress today on my Four Week Versions, working only on one project (et130webapp).
+            </p>
+            <p>
+                More on that in a bit, but first, I want to acknowedge the rich, engaging and just fun to read book series 
+                <a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" >You Don't Know JavaScript</a>. I finished reading the first book 
+                "up & going" this morning, and was able to digest a couple of chapters in the second book "Scope & Closures". Kyle Simpson has 
+                an outrageously enjoyable narrative of the compilation/execution of JS code where he presents the Engine, Scope and Compiler as characters 
+                engaged in dialogue. I have not yet read technical literature written in that fashion, and I am going to reconsider how I present topics to 
+                my own students. Perhaps it's my affinity for fables/storytelling, but it was a thrill to unpack the meaning of each dialogue when presented
+                in a casual tone. 
+            </p>
+            <h3>Chipping away at the minimum</h3>
+            <p>
+                One reason I focused on the et130webapp today was that I hadn't worked on it as I was finishing up the Two Week Versions of
+                the ThoughtBoard and FeelsTracker. The other reason was that I was a bit ambiguous on which next action to take on the other two 
+                projects, as I noticed that over the past few days, I have rushed toward tackling the most challenging version of the next feature, instead of the most approachable, simple and logical version which 
+                will eventually be generalized. 
+            </p>
+            <p>
+                Since I have a better grasp on the et130webapp, I was able to plan out smaller, more structured chunks for the Four Week Version. 
+                I figured that after I have completed a very small, structured task today, I will be in the right mindset to apply the same perspective 
+                and execute similar smaller, structured tasks for the other two projects tomorrow.
+            </p>
+            <br>
+            <h4>User selected topic</h4>
+            <p>
+                Initially, my <code class="inline-code">server.js</code> contained some logic which would randomly select one of the 10 available topics for the user, and then 
+                render its practice problems.
+            </p>        
+        <div class="code-container">
+        <pre><code class="language-javascript">
+// inside of app.route('/').get(...)
+
+    let topics = // array of topic strings
+    let topicSelector = Math.floor(Math.random() * (topics.length + 1));
+    let randomTopic = topics[topicSelector];
+
+    // topic Modules export a function (with the same name as the topic) 
+    // that generates an answer and a function `getProblem` that 
+    // generates the problem object
+    let topicFunction = require("./" + randomTopic)[randomTopic];
+    let getProblem = require("./" + randomTopic).getProblem;
+        </code></pre></div>
+        <p>
+            I updated that today, allowing the student to select the topic they wanted to practice from a dropdown, which 
+            gets sent in a <code class="inline-code">GET</code> request from the form.
+        </p>
+        <p>
+            For now, as everything is stored locally, I check to see if the user selected a new topic, and if so, use the 
+            appropriate functions to generate answers and problems. I initialized the <code class="inline-code">userSelectedTopic</code> 
+            as <code class="inline-code">ShearStress</code> to be the default for when the page first renders.
+        </p>
+    <div class="code-container">
+    <pre><code class="language-javascript">
+let userSelectedTopic = 'ShearStress';
+
+// inside app.route(...).get(...) //
+
+if (req.query.topic && userSelectedTopic !== req.query.topic) {
+    userSelectedTopic = req.query.topic;
+}
+
+let topicModule = require("./" + userSelectedTopic);
+let topicFunction = topicModule[userSelectedTopic];
+let getProblem = topicModule.getProblem;
+    </code></pre></div>
+    <img src="../images/20190122A.gif">
+    <p>
+        The next task will be to write a test for this functionality (as well as the random functionality), and once they pass, 
+        move on to the next task, which is:
+    </p>
+    <img class="medium" src="../images/20190122A.png">
+    </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
