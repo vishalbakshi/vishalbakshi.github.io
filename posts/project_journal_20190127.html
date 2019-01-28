@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: January 27, 2019</h2>
+            <p>
+                I finally wrote a test before writing a feature's code. In order to achieve my "non-negotiables" this weekend, I needed to figure out 
+                how to test front-end code that involved user actions (clicking buttons, submitting form data) that do not directly or 
+                immediately affect the backend code.
+            </p>
+            <p>
+                I chose to use QUnit, mainly because it is created by the authors of jQuery, and that's what I'm using for my DOM manipulation.
+            </p>
+            <h3>Testing jQuery</h3>
+            <p>
+                The online documentation for QUnit is very thorough and beginner-friendly. It took awhile for me to understand their example, 
+                but once I did, I found it surprisingly smooth to apply it to my situation.
+            </p>
+            <p>
+                Since I am using a pug template which is fed the practice problem from the server, I created a <code class="inline-code">"/test"</code> route
+                and copied the code from the home <code class="inline-code">"/"</code> into it. I added a <code class="inline-code">test.pug</code> template 
+                and inserted the suggested minimal QUnit "Getting Started" code. Next, I added a <code class="inline-code">include index.pug</code> underneath 
+                it, and I was ready to test.
+            </p>
+            <p>
+                I first wanted to test that the page would load with the Answer hidden (i.e. <code class="inline-code">display: none</code>):
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+    // get display attribute of `.answer` div
+    let answerDisplayStyle = $(".answer").css("display");
+
+    // assert if `display` is set to `none`
+    assert.equal(
+        answerDisplayStyle,
+        "none",
+        "Answer hidden on initial page load"
+    );
+        </code></pre></div>
+        <p>
+            I was very excited that this worked!
+        </p>
+        <img src="../images/20190127A.png">
+        <p>
+            I next added the test to ensure that clicking "Show Answer" changed the <code class="inline-code">display</code> property to 
+            <code class="inline-code">block</code>:
+        </p>
+        <img src="../images/20190127B.png">
+        <p>
+            Here's how it looks on the actual page:
+        </p>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
