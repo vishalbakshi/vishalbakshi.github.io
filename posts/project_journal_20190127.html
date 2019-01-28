@@ -25,35 +25,44 @@
             <br>
             <h2 class="title">Project Journal: January 27, 2019</h2>
             <p>
-                I finally wrote a test before writing a feature's code. In order to achieve my "non-negotiables" this weekend, I needed to figure out 
-                how to test front-end code that involved user actions (clicking buttons, submitting form data) that do not directly or 
-                immediately affect the backend code.
+                I (finally) wrote a test before writing a feature's code. The feature in question was adding a "Show Answer" button in my et130webapp 
+                which, upon being clicked, would show the answer to the user. This also meant that the page was loaded with the answer hidden.
+                
             </p>
             <p>
-                I chose to use QUnit, mainly because it is created by the authors of jQuery, and that's what I'm using for my DOM manipulation.
+                In order to achieve my "non-negotiables" this weekend, I needed to figure out how to test front-end code that involved user actions 
+                (clicking buttons, submitting form data) that do not directly or immediately affect the backend code.
+            </p>
+            <p>
+                I chose to use <a href="https://qunitjs.com/" target="_blank">QUnit</a>, mainly because it is created by the authors of jQuery, and that's what I'm using for my DOM manipulation.
             </p>
             <h3>Testing jQuery</h3>
             <p>
                 The online documentation for QUnit is very thorough and beginner-friendly. It took awhile for me to understand their example, 
                 but once I did, I found it surprisingly smooth to apply it to my situation.
             </p>
+            <h4>server.js</h4>
             <p>
                 Since I am using a pug template which is fed the practice problem from the server, I created a <code class="inline-code">"/test"</code> route
-                and copied the code from the home <code class="inline-code">"/"</code> into it. I added a <code class="inline-code">test.pug</code> template 
-                and inserted the suggested minimal QUnit "Getting Started" code. Next, I added a <code class="inline-code">include index.pug</code> underneath 
-                it, and I was ready to test.
+                and copied the code from the home route (<code class="inline-code">"/"</code>) into it. 
             </p>
+            <br>
+            <h4>views directory</h4>
+            <p>
+                I added a <code class="inline-code">test.pug</code> view and inserted the suggested minimal QUnit "Getting Started" code. 
+                In that pug file, I added <code class="inline-code">include index.pug</code> underneath the QUnit setup code, 
+                and I was ready to test my app using QUnit's beautiful interface.
+            </p>
+            <br>
+            <h4>QUnit tests</h4>
             <p>
                 I first wanted to test that the page would load with the Answer hidden (i.e. <code class="inline-code">display: none</code>):
             </p>
         <div class="code-container">
         <pre><code class="language-javascript">
-    // get display attribute of `.answer` div
-    let answerDisplayStyle = $(".answer").css("display");
-
     // assert if `display` is set to `none`
     assert.equal(
-        answerDisplayStyle,
+        $(".answer").css("display"),
         "none",
         "Answer hidden on initial page load"
     );
@@ -68,8 +77,45 @@
         </p>
         <img src="../images/20190127B.png">
         <p>
-            Here's how it looks on the actual page:
+            Here's how it looks on <code class="inline-code">index.pug</code>:
         </p>
+        <img class="medium" src="../images/20190127A.gif">
+        <h3>Adding answer submission functionality</h3>
+        <p>
+            We (I) were (was) off to the races with TDD! I was much more confident about writing code, and felt a strong sense 
+            of calm when writing tests before the feature's code. 
+        </p>
+        <p>
+            Here were the different tests I wrote as I built out the functionality to allow the user to input and check their answer 
+            for a given practice problem:
+        </p>
+        <iframe src="https://codesandbox.io/embed/m799kw2ryx?initialpath=%2Ftest&module=%2Fviews%2Ftests.js&moduleview=1&view=preview" 
+        style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" 
+        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+        <br>
+        <h4>User submits both the correct numeric answer and correct units</h4>
+        <img class="medium" src="../images/20190127B.gif">
+        <br>
+        <h4>User submits the correct numeric answer and INCORRECT units</h4>
+        <img class="medium" src="../images/20190127C.gif">
+        <br>
+        <h4>User submits the INCORRECT numeric answer and correct units</h4>
+        <img class="medium" src="../images/20190127D.gif">
+        <br>
+        <h4>User submits the INCORRECT numeric answer and units</h4>
+        <img class="medium" src="../images/20190127E.gif">
+        <br>
+        <p>
+            Pretty cool! I'll be reviewing the weekend non-negotiobles in tomorrow's post (spoiler alert: I didn't get them all done).
+        </p>
+        <h3>Cauliflower pizza</h3>
+        <p>
+            I was yet again enthused by eating cauliflower crust pizza, which is probably due to the fact that they may compensate cauliflower's lack 
+            of starchiness with cheese. Nevertheless, it does not leave behind the heavy feeling which the usual flour-based pizza crusts do.
+
+        </p>
+        <br>
+        <br>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
