@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: February 4, 2019</h2>
+            <p>
+                We interrupt this regularly scheduled program with <em>continuous integration and deployment!</em>
+            </p>
+            <h3>et130webapp</h3>
+            <p>
+                Two major (and majorly satisfying) tasks I completed today:
+            </p>
+            <ul class="bulleted">
+                <li class="bulleted">Setup Travis CI with the Github repository</li>
+                <li class="bulleted">Connect Github repository with Heroku and allow contiuous deployment if integration tests pass</li>
+            </ul>
+            <h4>Travis CI</h4>
+            <p>
+                I was having some issues with installing <code class="inline-code">travis</code> locally with rbenv/rvm but I was successfully able to do so with brew. 
+                After that, the major hurdle was setting up <code class="inline-code">.travis.yml</code> and then getting the tests to run successfully (and pass) upon each 
+                push to master.
+            </p>
+            <p>
+                After some googling, I created the yml file to be short and sweet:
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+language: node_js
+node_js:
+    - "stable"
+
+cache:
+    directories:
+    - "node_modules"
+        </code></pre></div>
+        <p>
+            I am not sure if these are the "best" configuration values for what I will need in the future, but at this point, I wanted to do the bare minimum and get the 
+            app running on heroku. 
+        </p>
+        <p>
+            My Mocha tests were not exiting/closing the server, and while there are options to <code class="inline-code">close()</code> the port connection, I instead chose 
+            to add <code class="inline-code">--exit</code> to my <code class="inline-code">test</code> script in <code class="inline-code">package.json</code>:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+"test": "mocha --exit --ui tdd ./src/test"
+        </code></pre></div>
+        <p>
+            I also dumped my unit tests into the <code class="inline-code">src/test</code> folder so that travis would run them as well.
+        </p>
+        <h4>Heroku listens to its own port</h4>
+        <p>
+            Although my tests were passing and Github was sending off the pushes to Heroku, I kept getting a <code class="inline-code">code=H10 desc="App crashed"</code> 
+            message in the <code class="inline-code">heroku logs</code>for all of the <code class="inline-code">GET</code> requests. 
+        </p>
+        <p>
+            During the development phase, I had explicitly forced the server to listen on port 8080, and Heroku listens to its own port so this would not suffice. After a number 
+            of attempts, I decided to fallback on this approach I had seen used in quite a number of tutorials/SO answers:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+const port = process.env.PORT || 8080;
+        </code></pre></div>
+        <p>
+            Since I had not declared a <code class="inline-code">PORT</code> in my <code class="inline-code">.env</code> file, and even if I had done so that file was being 
+            <code class="inline-code">.gitignore</code>d anyway, the line above would allow both Travis and Heroku to do their thing.
+        </p>
+        <p>
+            Here's the first passing build logo I have encountered!
+        </p>
+        <img src="../images/20190204A.png">
+        <h4>The sweet results</h4>
+        <p>
+            The Travis build test results are shown at <a href="https://travis-ci.org/vishalbakshi/et130webapp" target="_blank">this link</a> and the Heroku app is <a href="http://et130.herokuapp.com">
+             located here</a>. Hopefully I'm not in the middle of fixing something when you access those!
+        </p>
+        <p>
+            Moving forward with renewed spirit on deploying the other two apps....
+        </p>
+        <br>
+        <br>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
