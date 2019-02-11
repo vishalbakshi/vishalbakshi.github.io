@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: February 10, 2019</h2>
+            <p>
+                I've ended up hitting a roadblock in the deployment process, as I can't get half of my QUnit tests 
+                to pass in the PhantomJS headless browser.
+            </p>
+            <p>
+                The issue at hand is peculiar. All of my tests which use the "Submit my answer" button are failing. 
+                The initial issue was that two useful lines of jQuery, <code class="inline-code">e.preventDefault()</code> 
+                and <code class="inline-code">result false;</code> were seemingly not preventing the form fields from appending 
+                the URL and being sent as a GET request.
+            </p>
+            <p>
+                I made the form explicitly POST (which is what it will eventually need), and that issue was resolved. 
+            </p>
+            <p>
+                However, my headless browser experience different from the Chrome experience, where upon clicking "Submit my answer" 
+                the user would see a message appear in a span, based on their response (i.e. "Incorrect units", "Correct!", etc.)
+            </p>
+            <p>
+                I have a spent a couple days on this issue, partly because I was consistently getting more clarity on the issue the more 
+                I worked on it. However, and this is assuming I will not experience similar issues with another headless browser, moving to 
+                Puppeteer will at least provide me an opportunity to discover if my code is faulty in general or just for PhantomJS.
+            </p>
+            <p>
+                At this point, with one week left until my Six Week Versions are due, I am going to pursue using another headless 
+                browser, namely <a href="https://www.npmjs.com/package/puppeteer" target="_blank">puppeteer</a>, and save this PhantomJS 
+                puzzle as an issue for another day.
+            </p>
+            <h3>Running a process in parallel</h3>
+            <p>
+                The PhantomJS was not all for naught, as I learned how to configure my <code class="inline-code">.travis.yml</code> file 
+                in order to start the server prior to running the tests:
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+language: node_js
+node_js:
+    - "stable"
+
+cache:
+    directories:
+    - "node_modules"
+
+before_script:
+    - npm install connect
+    - node src/server.js ../../ 8080 &
+    - sleep 15
+
+script: 
+    - phantomjs src/test/run_qunit.js "http://localhost:8080/test"
+        </code></pre></div>
+        <p>
+            The server is listening on port 8080 before the test script is run. 
+        </p>
+    <h3>Running a process in parallel</h3>
+    <p>
+        I am confident that I will be able to complete all of my Six Week Versions, although much of that confidence may depend 
+        on how quickly I transition from half-way working PhantomJS to Puppeteer. Let's find out this week!
+    </p>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
