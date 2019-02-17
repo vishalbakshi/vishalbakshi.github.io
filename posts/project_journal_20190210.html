@@ -30,7 +30,7 @@
             </p>
             <p>
                 The issue at hand is peculiar. All of my tests which use the "Submit my answer" button are failing. 
-                The initial issue was that two useful lines of jQuery, <code class="inline-code">e.preventDefault()</code> 
+                Before that, the issue was that two useful lines of jQuery, <code class="inline-code">e.preventDefault()</code> 
                 and <code class="inline-code">result false;</code> were seemingly not preventing the form fields from appending 
                 the URL and being sent as a GET request.
             </p>
@@ -38,13 +38,13 @@
                 I made the form explicitly POST (which is what it will eventually need), and that issue was resolved. 
             </p>
             <p>
-                However, my headless browser experience different from the Chrome experience, where upon clicking "Submit my answer" 
+                However, my headless browser experience is different from the (headed?) Chrome experience, where upon clicking "Submit my answer" 
                 the user would see a message appear in a span, based on their response (i.e. "Incorrect units", "Correct!", etc.)
             </p>
             <p>
-                I have a spent a couple days on this issue, partly because I was consistently getting more clarity on the issue the more 
+                I have a spent a couple of days on this issue, partly because I was consistently getting more clarity on the issue the more 
                 I worked on it. However, and this is assuming I will not experience similar issues with another headless browser, moving to 
-                Puppeteer will at least provide me an opportunity to discover if my code is faulty in general or just for PhantomJS.
+                another headless browser will at least provide me an opportunity to discover if my code is faulty in general or just for PhantomJS.
             </p>
             <p>
                 At this point, with one week left until my Six Week Versions are due, I am going to pursue using another headless 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: February 16, 2019</h2>
+            <p>
+                Blast the trumpets for Puppeteer.
+            </p>
+            <p>
+                I had a very positive, and relatively smooth experience last week testing Puppeteer locally, configuring the <code class="inline-code">travis.yml</code> file, and getting the Travis 
+                build to pass.
+            </p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+const puppeteer = require('puppeteer');
+
+(async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    page.on('console', function(msg){
+    for (let i = 0; i < msg.args().length; ++i){
+        console.log(`${i}: ${msg.args()[i]}`);
+    }
+    })
+    await page.goto('http://localhost:8080/test');
+
+    // Grab the element based on QUnit-given selector.
+    // This element which holds the number of failed tests
+    const failedSpan = await page.$('span[class=failed]');
+
+    // Log the number of fail tests (if there are any)
+    // and exit process with error code
+    const failedCount = await page.evaluate(function(failedSpan){
+    if (failedSpan.textContent != 0){
+        console.log(failedSpan.textContent);
+        process.exit(1);
+    } else {
+        console.log('All QUnit tests have passed');
+    }
+    }, failedSpan)
+
+    await browser.close();
+})();
+        </code></pre></div>
+        <p>
+            This worked beautifully, both locally and on Travis.
+        </p>
+        <h3>The weekend spring</h3>
+        <p>
+            These 3 day weekends give a great opportunity to 1) relax and 2) get ahead on these projects. I'm going to minify the Six Week Versions since I do not 
+            think I will get everything done as planned:
+        </p>
+        <ul class="bulleted">
+            <li class="bulleted">et130webapp</li>
+            <ul class="bulleted">
+                <li class="bulleted"><s>Deploy with CI having passing build and test</li></s>
+                <li class="bulleted">Clean up the UI</li>
+            </ul>
+            <li class="bulleted">ThoughtBoard</li>
+            <ul class="bulleted">
+                    <li class="bulleted">Deploy with CI having passing build and test</li>
+                </ul>
+            <li class="bulleted">FeelsTracker</li>
+            <ul class="bulleted">
+                    <li class="bulleted">Finish core functionality for all petals/emotions</li>
+                    <li class="bulleted">Deploy with CI having passing build and test</li>
+                </ul>
+        </ul>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
