@@ -31,6 +31,10 @@
                 I had a very positive, and relatively smooth experience last week testing Puppeteer locally, configuring the <code class="inline-code">travis.yml</code> file, and getting the Travis 
                 build to pass.
             </p>
+            <p>
+                The following code was all that was needed in ensuring that I checked the QUnit tests, and logged them accordingly, exiting the process with an error 
+                code if needed:
+            </p>
                 
         <div class="code-container">
         <pre><code class="language-javascript">
@@ -41,10 +45,11 @@ const puppeteer = require('puppeteer');
     const page = await browser.newPage();
 
     page.on('console', function(msg){
-    for (let i = 0; i < msg.args().length; ++i){
-        console.log(`${i}: ${msg.args()[i]}`);
-    }
+        for (let i = 0; i < msg.args().length; ++i){
+            console.log(`${i}: ${msg.args()[i]}`);
+        }
     })
+
     await page.goto('http://localhost:8080/test');
 
     // Grab the element based on QUnit-given selector.
@@ -54,12 +59,12 @@ const puppeteer = require('puppeteer');
     // Log the number of fail tests (if there are any)
     // and exit process with error code
     const failedCount = await page.evaluate(function(failedSpan){
-    if (failedSpan.textContent != 0){
-        console.log(failedSpan.textContent);
-        process.exit(1);
-    } else {
-        console.log('All QUnit tests have passed');
-    }
+        if (failedSpan.textContent != 0){
+            console.log(failedSpan.textContent);
+            process.exit(1);
+        } else {
+            console.log('All QUnit tests have passed');
+        }
     }, failedSpan)
 
     await browser.close();
