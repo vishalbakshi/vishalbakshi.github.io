@@ -53,7 +53,7 @@ const puppeteer = require('puppeteer');
     await page.goto('http://localhost:8080/test');
 
     // Grab the element based on QUnit-given selector.
-    // This element which holds the number of failed tests
+    // This element holds the number of failed tests
     const failedSpan = await page.$('span[class=failed]');
 
     // Log the number of fail tests (if there are any)
@@ -73,7 +73,7 @@ const puppeteer = require('puppeteer');
         <p>
             This worked beautifully, both locally and on Travis.
         </p>
-        <h3>The weekend spring</h3>
+        <h3>The weekend sprint</h3>
         <p>
             These 3 day weekends give a great opportunity to 1) relax and 2) get ahead on these projects. I'm going to minify the Six Week Versions since I do not 
             think I will get everything done as planned:
