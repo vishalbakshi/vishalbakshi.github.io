@@ -173,6 +173,67 @@ code.inline-code {
     padding-right: 2px;
 }
 
+.resume {
+    margin: 0;
+}
+
+h2.resume {
+    color: rgb(255, 133, 117);
+    margin-top: 50px;
+}
+
+h2.resume:hover {
+    color: rgb(255, 30, 0);
+}
+
+h3.resume {
+    color: rgb(75, 75, 75);
+    margin-top: 15px;
+}
+
+p.resume {
+    font-size: 0.8em;
+}
+
+li.resume {
+    font-size: 0.8em;
+    line-height: 1em;
+}
+
+div.skills {
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    grid-auto-flow: column dense;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10px;
+
+}
+
+img.skills {
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#puppeteer,
+#js,
+#css3,
+#tape {
+    width: 40%;
+}
+
+#qunit,
+#mocha,
+#git,
+#html5 {
+    width: 60%;
+}
+
+#chai,
+#d3 {
+    width: 50%;
+}
 blockquote {
     font-size: 0.9em;
     margin: auto;
