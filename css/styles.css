@@ -202,7 +202,7 @@ li.resume {
 
 div.skills {
     display: grid;
-    grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+    grid-template: repeat(5, 1fr) / repeat(4, 1fr);
     grid-auto-flow: column dense;
     justify-items: center;
     align-items: center;
@@ -216,11 +216,14 @@ img.skills {
     margin: 0;
 }
 
+#firebase {
+    width: 20%
+}
+
 #puppeteer,
 #js,
 #css3,
-#tape,
-#firebase {
+#tape {
     width: 40%;
 }
 
