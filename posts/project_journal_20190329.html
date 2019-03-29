@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: March 28, 2019</h2>
+            <p>
+                A short entry for today:
+            </p>
+            <p>
+                The following Google Codelabs are highly recommended if you are new to Firebase: <a href="https://codelabs.developers.google.com/codelabs/firebase-web/#0" target="_blank">Firebase Web Codelab</a>
+                and <a href="https://codelabs.developers.google.com/codelabs/firebase-cloud-functions/#5" target="_blank">Cloud Functions for Firebase Codelab</a>.
+            </p>
+            <p>
+                However, a more thorough (for beginners) tutorial is available at <a href="https://www.fullstackfirebase.com/" target="_blank">https://www.fullstackfirebase.com/</a> 
+                which, in my opinion, is the best tutorial I have come across yet. He's honest about the complexity of a non-trivial web app, and thorough with his explanations---often 
+                filling in the gaps in the (well written) <a href="https://firebase.google.com/docs/web/setup" target="_blank">Firebase documentation</a> that beginners like me would not deduce on my own. 
+            </p>
+            <p>
+                I've only read through this once, and have not yet coded along with it, but I am relieved to find the most understandable tutorial on testing Firebase functions: 
+                <a href="https://howtofirebase.com/test-driven-cloud-functions-fea53c64110c" target="_blank">Test-Driven Cloud Functions</a>
+            </p>
+            <p>
+                Lastly, a debug experience: while building a firebase app, I needed to retrieve a <class="inline-code">users</class>' email field, but it's value was <class="inline-code">null</class> 
+                even though I had signed up using Google Authentication. As it turns out, I was allowing "multiple accounts using the same email address" 
+                which was causing this issue. I switched that setting in "Sign-In Method" on the Firebase Console to "One account per email address", deleted my two dummy user accounts from the app,
+                signed up again and voila the email addresses were stored. I could then retrieve a user's email field and was able to verify associated fields in other 
+                collections.
+            </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+
+        </code></pre></div>
+        
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
