@@ -80,6 +80,14 @@ p.posts {
     line-height: 120%;
 }
 
+p.fanciness {
+    color: #FF3D00;
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+}
+
 ul.bulleted {
     list-style-type: circle;
     text-align: left;
@@ -153,8 +161,6 @@ img {
     margin: auto;
     border-radius: 15px;
 }
-
-
 
 .code-container {
     display: block;
