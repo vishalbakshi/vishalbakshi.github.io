@@ -5,7 +5,7 @@
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width">
         <title>Vishal Bakshi</title>
-        <link href="../css/styles.css" rel="stylesheet"/>
+        <link href="css/styles.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
     </head>
 <body>
@@ -24,6 +24,48 @@
         <div id="content">
             <br>
             <h2 class="title">Projects</h2>
+            <h3>Open Source Contributions</h3>
+            <h4>San Francisco Transit Riders (SFTR) DataJAM</h4>
+            <p>During this one-day hackathon/datathon hosted by SFTR, Code For America and the American Planning Association, my team (including a Product Manager from Facebook, Data Analyst from Nielsen, Data Scientist from 6Sense, 
+                and Executive Director of SFTR) created a Proof Of Concept for a tool that SFTR can use to present visualizations to advocate for their <a href="https://sftransitriders.org/30x30/">30 x 30 Rapid Rider Network initiative.</a> </p>
+            <p>My contributions to this project:</p>
+
+            <ul class="bulleted">
+                <li><h5>Day of Event</h5></li>
+                <ul>
+                    <li>Facilitate and document initial our brainstorm discussion</li>
+                    <li>Set up a local version of the existing open source project: <a href="https://github.com/mapnificent">Mapnificent</a></li>
+                    <li>Understand and articulate the existing functionality and app architecture to the team</li>
+                    <li>Set up a local version of the open source <a href="https://github.com/mapnificent/mapnificent_generator">Mapnificent Generator</a> to convert gtfs tab-delimited files to binary</li>
+                </ul>
+                <li><h5>Two Weeks after</h5></li>
+                    <ul>
+                        <li>Research <a href="https://github.com/vishalbakshi/mapnificent/tree/master/notes">and document</a> existing and additional Mapnificent app functionality to determine our design and development options moving forward</li>
+                        <li>Build a <a href="https://github.com/vishalbakshi/mapnificent-generator-server">local Go server</a> that requests GTFS data and converts it to the structured binary file</li>
+                    </ul>
+                <li><h5>Four Weeks after</h5></li>
+                <ul>
+                    <li>Build a <a href="https://github.com/vishalbakshi/gtfsapi/tree/version2/database_queries">local Node server</a> that creates table schema, connects to a Google Cloud SQL instance, and loads GTFS tab-delimited data into those tables</li>
+                    <li><a href="https://github.com/vishalbakshi/mapnificent/blob/static-gtfs-subsets/README.md">Modify Mapnificent's functionality </a>to allow users to select and view individual SFMTA MUNI route isochrones</li>
+                    <li>Coordinate, prepare and facilitate a team-wide meeting to finalize the project vision and objectives</li>
+                </ul>
+            </ul>
+            <h4>Call For Code: Wildfire Challenge</h4>
+            <p>During this one-day hackathon hosted by IBM and 42 Silicon Valley, my team (including a recent UX Design bootcamp graduate and web development bootcamp graduate) created a Proof 
+                Of Concept for a tool that United Way could use to manage wildfire victim data. We called this tool the "Wildfire Victim Management System".
+            </p>
+            <p>My contributions to this project:</p>
+            <ul>
+                <li><h5>Day of Event</h5></li>
+                <ul>
+                    <li>Interview the United Way Development Director to collect information on their existing process to evaluate home damage for cash grant distribution</li>
+                    <li>Train a three class (Burned, Not Burned, Negative) image classification model using Watson Studio</li>
+                    <li>Build a local Node server that sends an image to the Watson model's API and receives both a class and a score</li>
+                    <li>Build a UI which allows a user to submit an image and view the Watson model results</li>
+                </ul>
+                
+            </ul>
+            
             <h3>Personal Projects</h3>
             <h4>ET 130 Web App</h4>
             <a href="https://github.com/vishalbakshi/et130webapp" target="_blank"><h5>Github Repository</h5></a>
