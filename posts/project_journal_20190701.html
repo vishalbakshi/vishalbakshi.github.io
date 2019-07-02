@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: July 1, 2019</h2>
+            <p>
+              I need to think out loud about what tests I need to write before I move forward with a project so I'm writing it here.
+              But was it really out loud if you don't hear it? I need to think in (your mind) loud then. I make terrible jokes sorry.
+            </p>
+            <h3>Form Tests</h3>
+            <p>The project is lovely and simple: 
+            the user submits a form with their information (text, images), previews it, 
+            submits it (or edits it) and receives a confirmation message.
+            </p>
+            <p>
+              Right now I test that each component is rendered, and that the user can click "preview" and "submit" buttons.
+            </p>
+            <h4>Here are tests that I need:</h4>
+            <p>Upon clicking the "preview" button, the form data displayed should match what was inputted by the user</p>
+            <p>The user can go back to the editable form and update the data</p>
+            <p>Upon submission, the data is prepared to be sent to the database</p>
+            <p>Upon submission, the user receives a confirmation message which includes the email sign-in link</p>
+            <p>Upon submission, the data is successfully sent to the database</p>
+            <p>Upon navigating to the email sign-in link, the user can view and update their form<p>
+            <h4>Here is some pseudo-code to get this out on screen:</h4>
+
+        <div class="code-container">
+        <pre><code class="language-javascript">
+            // Upon clicking the "preview" button, the form data displayed should match what was inputted by the user
+                cy.get('[name="first_name]')
+                  .type('first name')
+                  
+                cy.get('[name="preview"]')
+                  .click()
+            
+                cy.get('[name="first_name]')
+                  .should('eq', 'first name')
+              
+                // etc...
+            
+            // The user can go back to the editable form and update the data
+            
+                cy.get('[name="back"]')
+                  .click()
+                
+                cy.get('[name="last_name"]')
+                  .type('different last name')
+                  
+                cy.get('[name="preview"]')
+                  .click()
+                  
+                cy.get('[name="last_name"]')
+                  .should('eq', 'different last name')  
+                
+                // etc...
+            
+            // Upon submission, the data is prepared to be sent to the database
+            // Upon submission, the data is successfully sent to the database
+            // Not sure about these ones quite yet, but I'll reference some previous apps I've made with firebase
+            // when i get to that point this week
+            
+            // Upon submission, the user receives a confirmation message which includes the email sign-in link
+                cy.get('[name="submit"]')
+                  .click()
+                
+                cy.get('[name="sign-in-link"]')
+                  .should('exist')
+                  
+                // etc...  
+            // Upon navigating to the email sign-in link, the user can view and update their form
+                cy.visit(emailLink)
+                
+                cy.get('[name="first_name"]')
+                  .should('eq', 'first name')
+                
+                cy.get('[name="first_name]')
+                  .type('different first name')
+                  
+                cy.get('[name="preview"]')
+                  .click()
+            
+                cy.get('[name="first_name]')
+                  .should('eq', 'different first name')
+                
+                // etc...
+    
+        </code></pre></div>
+        
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
