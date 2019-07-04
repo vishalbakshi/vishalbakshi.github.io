@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    </head>
+<body>
+    <header>
+        <h1>Vishal Bakshi</h1>
+            <ul class="not-bulleted">
+                <li class="not-bulleted"><a class="blacklink" href="https://vishalbakshi.github.io/">Home</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../about.html">About</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../resume.html">Resume</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../fcc.html">freeCodeCamp</a></li>
+                <li class="not-bulleted"><a class="blacklink" href="../projects.html">Projects</a></li>
+            </ul>
+    </header>
+
+    <main>
+        <div id="content">
+            <br>
+            <h2 class="title">Project Journal: July 4, 2019</h2>
+            <p>
+                I am forcing myself to be test-driven, but I'm also procrastinating on writing those tests for some reason, so my overall progress feels a bit slow this week. That being said, I think I've made some good progress:
+            </p>
+            <h3>Web APIs</h3>
+            <p>
+                In the SFTR Embed project (forked from Mapnificent) I had implemented a jQuery script which gathered the IDs of user-selected routes in an array and saved it to a global variable, which would later be used by another client-side script to filter the transit data.
+            </p>
+            <p>Here's the original code:</p>
+                
+        <div class="code-container">
+        <pre><code class="language-javascript">
+            // Populate `window.checkRoutes` with an Array of user-selected route IDs
+            let routes = [];
+            window.checkedRoutes = [];
+            $('.route-checkbox').change(function(){
+                if ($(this).is(':checked')) {
+                    routes.push($(this)[0].value);
+                    window.checkedRoutes = routes;
+                } else {
+                    let routeIdx = routes.indexOf($(this)[0].value);
+                    routes.splice(routeIdx,1);
+                    window.checkedRoutes = routes;
+                };
+                // ...mapnificent function calls to render the filtered isochrones
+            })   
+        </code></pre></div>
+        <p>
+            I wanted to first write tests for this before implementing it into the codebase, but I also wanted to get a move on refactoring it using Web APIs, so I wrote out the following as a first draft:
+        </p>
+        <div class="code-container">
+        <pre><code class="language-javascript">
+            let window.userSelectedRoutes = [];
+            let routeCheckboxes = document.getElementsByClassName('route-checkbox')
+
+            for (let checkbox of routeCheckboxes) {
+                // check if checkbox is checked and if so, add the id to `userSelectedRoutes`
+            }
+        </code></pre></div>
+        <h3>Pseudo-code Tests</h3>
+        <p>
+            I would like to add the following features this week:
+        </p>
+        <h4>Client-Side (JS)</h4>
+        <p>
+            Only user selected routes are sent to Mapnificent for isochrone rendering
+        </p>
+        <p>
+            Rendered isochrones `class` matches the route `id` of user selected routes. Or some similarly matching attributes.
+        </p>
+        <h4>Server-side (Go)</h4>
+        <p>
+            User can upload their own gtfs zip files
+        </p>
+        <p>
+            Uploaded zip files are converted to binary using existing `mapnificent.go` script
+        </p>
+        <p>
+            Generated binary file is saved in local storage. 
+        </p>
+        <p>
+            Generated binary file in local storage is referenced in `loadData`
+        </p>
+        <p>
+            All client-side tests should still work with this data source
+        </p>
+        </div>
+        <p>
+            Wish me luck!
+        </p>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
