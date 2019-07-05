@@ -35,32 +35,32 @@
                 
         <div class="code-container">
         <pre><code class="language-javascript">
-            // Populate `window.checkRoutes` with an Array of user-selected route IDs
-            let routes = [];
-            window.checkedRoutes = [];
-            $('.route-checkbox').change(function(){
-                if ($(this).is(':checked')) {
-                    routes.push($(this)[0].value);
-                    window.checkedRoutes = routes;
-                } else {
-                    let routeIdx = routes.indexOf($(this)[0].value);
-                    routes.splice(routeIdx,1);
-                    window.checkedRoutes = routes;
-                };
-                // ...mapnificent function calls to render the filtered isochrones
-            })   
+        // Populate `window.checkRoutes` with an Array of user-selected route IDs
+        let routes = [];
+        window.checkedRoutes = [];
+        $('.route-checkbox').change(function(){
+            if ($(this).is(':checked')) {
+                routes.push($(this)[0].value);
+                window.checkedRoutes = routes;
+            } else {
+                let routeIdx = routes.indexOf($(this)[0].value);
+                routes.splice(routeIdx,1);
+                window.checkedRoutes = routes;
+            };
+            // ...mapnificent function calls to render the filtered isochrones
+        })   
         </code></pre></div>
         <p>
             I wanted to first write tests for this before implementing it into the codebase, but I also wanted to get a move on refactoring it using Web APIs, so I wrote out the following as a first draft:
         </p>
         <div class="code-container">
         <pre><code class="language-javascript">
-            let window.userSelectedRoutes = [];
-            let routeCheckboxes = document.getElementsByClassName('route-checkbox')
+        window.userSelectedRoutes = [];
+        let routeCheckboxes = document.getElementsByClassName('route-checkbox')
 
-            for (let checkbox of routeCheckboxes) {
-                // check if checkbox is checked and if so, add the id to `userSelectedRoutes`
-            }
+        for (let checkbox of routeCheckboxes) {
+            // check if checkbox is checked and if so, add the id to `userSelectedRoutes`
+        }
         </code></pre></div>
         <h3>Pseudo-code Tests</h3>
         <p>
