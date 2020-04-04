@@ -2,8 +2,9 @@
   width: 100%;
 }
 
-ul {
+.container {
   text-align: center;
+  background-image: url("images/landing_face.jpg")
 }
 
 h1 {
