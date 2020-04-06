@@ -1,7 +1,5 @@
-#map {
-  width: 100%;
-}
-
 #face {
+  display: block;
+  margin: auto;
   height: 100vh;
 }
