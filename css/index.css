@@ -2,19 +2,6 @@
   width: 100%;
 }
 
-.container {
-  text-align: center;
-  background-image: url("images/landing_face.jpg")
-}
-
-h1 {
-  font-family: Futura;
-  font-size: 5em;
-  padding: 0;
-  margin: 0;
-  transition: 0.5s;
-}
-
-h1:hover {
-  color: red;
+#map {
+  height: 100vh;
 }
