@@ -7,28 +7,65 @@
         <title>Vishal Bakshi</title>
         <link href="css/gallery.css" rel="stylesheet"/>
     </head>
-<body>
-  <div id="gallery-container">
-    <img class="gallery" src="images/PNG/something-01.png"/>
-    <img class="gallery" src="images/PNG/bell1-01.png"/>
-    <img class="gallery" src="images/PNG/compost-01.png"/>
-    <img class="gallery" src="images/PNG/openbook1-01.png"/>
-    <img class="gallery" src="images/PNG/lovelove-01.png"/>
-    <img class="gallery" src="images/PNG/ruler1-01.png"/>
-    <img class="gallery" src="images/PNG/thescript-01.png"/>
-    <img class="gallery" src="images/PNG/sharpie1-01.png"/>
-    <img class="gallery" src="images/PNG/onlylove-01.png"/>
-    <img class="gallery" src="images/PNG/mug1-01.png"/>
-    <img class="gallery" src="images/PNG/heal-01.png"/>
-    <img class="gallery" src="images/PNG/pen1-01.png"/>
-    <img class="gallery" src="images/PNG/loveandabuse-01.png"/>
-    <img class="gallery" src="images/PNG/postit1-01.png"/>
-    <img class="gallery" src="images/PNG/lovestruths-01.png"/>
-    <img class="gallery" src="images/PNG/pansy-01.png"/>
-    <img class="gallery" src="images/PNG/embarassed-01.png"/>
-    <img class="gallery" src="images/PNG/daisy-01.png"/>
-    <img class="gallery" src="images/PNG/nailpolish1-01.png"/>
-    <img class="gallery" src="images/PNG/wnc_wnu-01.png"/>
-  </div>
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        let active = false;
+
+        const lazyLoad = function() {
+            if (active === false) {
+                active = true;
+                
+        setTimeout(function() {
+            lazyImages.forEach(function(lazyImage) {
+                if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.srcset = lazyImage.dataset.srcset;
+                    lazyImage.classList.remove("lazy");
+                    
+                    lazyImages = lazyImages.filter(function(image) {
+                        return image !== lazyImage;
+                    });
+                    
+                    if (lazyImages.length === 0) {
+                        document.removeEventListener("scroll", lazyLoad);
+                        window.removeEventListener("resize", lazyLoad);
+                        window.removeEventListener("orientationchange", lazyLoad);
+                    }
+                }
+            });
+            active = false;
+        }, 200);
+            }
+        };
+            document.addEventListener("scroll", lazyLoad);
+            window.addEventListener("resize", lazyLoad);
+            window.addEventListener("orientationchange", lazyLoad);
+        });
+    </script>
+    <body>
+        <div id="gallery-container">
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/something-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/bell1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/compost-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/openbook1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/lovelove-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/ruler1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/thescript-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/sharpie1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/onlylove-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/mug1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/heal-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/pen1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/loveandabuse-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/postit1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/lovestruths-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/pansy-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/embarassed-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/daisy-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/nailpolish1-01.png" data-srcset=""/>
+            <img class="gallery lazy" src="images/PNG/placeholer.png" data-src="images/PNG/wnc_wnu-01.png" data-srcset=""/>
+        </div>
+    </body>
+
 </html>
