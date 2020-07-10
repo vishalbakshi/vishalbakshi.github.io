@@ -6,6 +6,6 @@
     height: 100vh;
 }
 
-h1, ul.navigation {
+h1, ul.navigation, a.blogpostlink {
     font-family: "Didact Gothic", sans-serif;
 }
