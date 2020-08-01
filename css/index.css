@@ -7,6 +7,6 @@
     height: 100vh;
 }
 
-h1, ul.navigation, a.blogpostlink {
+h1, p, ul.navigation, a.blogpostlink {
     font-family: 'Nanum Myeongjo', serif;
 }
