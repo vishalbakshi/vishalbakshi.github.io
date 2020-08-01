@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
-#face {
-    display: block;
-    margin: auto;
-    height: 100vh;
-}
-
-h1, p, ul.navigation, a.blogpostlink {
+body {
     font-family: 'Nanum Myeongjo', serif;
 }
