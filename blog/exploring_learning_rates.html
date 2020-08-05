@@ -16,29 +16,45 @@
           <li>lr_find() saves the model before it trains on the data, and then loads the model again once it's done. This is why you still have to unfreeze() the model afterwards before you can fit it again (if you want to fit all layers).</li>
         </ul>
         
-The next set of observations were from trying different start and end learning rates (which you only need to do for the actual fit). Here are screenshots of learning rate vs loss plots for different start_lr and end_lr values:
-
-<img src="../images/blog/exploring_learning_rates/Figure1.png" alt="Learning Rate vs Loss for Learning Rates between 1e-20 and 1e-1">
-<img src="../images/blog/exploring_learning_rates/Figure2.png" alt="Learning Rate vs Loss for Learning Rates between 1e-30 and 1e-1">
-<img src="../images/blog/exploring_learning_rates/Figure3.png" alt="Learning Rate vs Loss for Learning Rates between 1e-100 and 1e-100">
-<img src="../images/blog/exploring_learning_rates/Figure5.png" alt="Learning Rate vs Loss for Learning Rates between 1e-200 and 1e-1">
-<p>At some point, a low enough learning rate causes a ZeroDivisionError</p>
-<img src="../images/blog/exploring_learning_rates/Figure4.png" alt="Learning Rate vs Loss for Learning Rates between 1e-1000 and 1e-1">
-
-<p>I then increased end_lr above 1e-3, and lr_find() basically didn't run:</p>
-
-<img src="../images/blog/exploring_learning_rates/Figure6.png" alt="Learning Rate vs Loss for Learning Rates between 1e-3 and 1e-1">
-
-Without any given start_lr or end_lr, lr_find() defaults to start_lr=1e-7 and end_lr=10.
-
-<img src="../images/blog/exploring_learning_rates/Figure15.png" alt="Learning Rate vs Loss for Learning Rates with default values of start_lr=1e-7 and end_lr=10">
-
-After thinking about all of this for awhile, I realized this: the real benefit of fixing a minimum and maximum learning rate is realized when you are actually fitting the model, not when you are trying to find a good learning rate range to use.
-
-<img src="../images/blog/exploring_learning_rates/Figure17.png" alt="Model fit using learning rate between 1e-6 and 1e-4 resulting in an error rate of 6.22%">
-        
-    
+<p>The next set of observations were from trying different start and end learning rates (which you only need to do for the actual fit). Here are screenshots of learning rate vs loss plots for different start_lr and end_lr values:</p>
         </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure1.png" alt="Learning Rate vs Loss for Learning Rates between 1e-20 and 1e-1">
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure2.png" alt="Learning Rate vs Loss for Learning Rates between 1e-30 and 1e-1">
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure3.png" alt="Learning Rate vs Loss for Learning Rates between 1e-100 and 1e-100">
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure5.png" alt="Learning Rate vs Loss for Learning Rates between 1e-200 and 1e-1">
+        </div>
+        <div>
+            <p>At some point, a low enough learning rate causes a ZeroDivisionError</p>
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure4.png" alt="Learning Rate vs Loss for Learning Rates between 1e-1000 and 1e-1">
+        </div>
+        <div>
+            <p>I then increased end_lr above 1e-3, and lr_find() basically didn't run:</p>
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure6.png" alt="Learning Rate vs Loss for Learning Rates between 1e-3 and 1e-1">
+        </div>
+        <div>
+            <p>Without any given start_lr or end_lr, lr_find() defaults to start_lr=1e-7 and end_lr=10.</p>
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure15.png" alt="Learning Rate vs Loss for Learning Rates with default values of start_lr=1e-7 and end_lr=10">
+        </div>
+        <div>   
+            <p>After thinking about all of this for awhile, I realized this: the real benefit of fixing a minimum and maximum learning rate is realized when you are actually fitting the model, not when you are trying to find a good learning rate range to use.</p>
+        </div>
+        <div>
+            <img src="../images/blog/exploring_learning_rates/Figure17.png" alt="Model fit using learning rate between 1e-6 and 1e-4 resulting in an error rate of 6.22%">
+        </div>
+       
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
 </body>
