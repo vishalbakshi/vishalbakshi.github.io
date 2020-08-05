@@ -9,4 +9,6 @@ body {
 img {
     width: 50vw;
     border: solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
