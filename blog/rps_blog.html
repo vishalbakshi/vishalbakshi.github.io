@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width">
+        <title>Vishal Bakshi</title>
+        <link href="../css/index.css" rel="stylesheet"/>
+    </head>
+<body>
+    <main>
+        <div id="content">   
+          <p> I ran through another dataset with fastai and was again, blown away by how easy it is to use and how accurate the results are.</p>
+          <p>I trained a resnet34 learner on a dataset of Rock-Paper-Scissors (the game) hand gesture images.
+          <p>The biggest lesson I learned today was unzipping files using Python. The following block of code helped me extract the zip file full of images into the corresponding folders:
+        </div>
+        
+        <div>
+          <pre>
+            from zipfile import ZipFile
+            with ZipFile("images/scissors.zip", "r") as archive:
+                archive.extractall("images/scissors")
+          </pre>
+        </div>
+        <div>
+          Here's a link to the <a href="rps.html">Jupyter Notebook for today's experiment.</a>
+        </div>
+     
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+</body>
+</html>
