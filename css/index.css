@@ -8,4 +8,5 @@ body {
 
 img {
     width: 50vw;
+    border: solid black;
 }
