@@ -9,7 +9,8 @@
     </head>
 <body>
     <main>
-        <div id="content">   
+        <div id="content">
+        <div>   
         <p>I've learned and clarified a few things about learning rates, which I will have to validate once I have a deeper understanding of these concepts. The first two were <a href="https://forums.fast.ai/t/should-lr-find-be-used-before-unfreeze-or-after-for-fine-tuning/27990/5?u=vbakshi">from this helpful fastai forum post</a>:</p>
         <ul>
           <li>Each time you run {learner_name}.lr_find() from the fastai library, it uses a random set of data (in "batches") to train the data.</li>
@@ -54,7 +55,7 @@
         <div>
             <img src="../images/blog/exploring_learning_rates/Figure17.png" alt="Model fit using learning rate between 1e-6 and 1e-4 resulting in an error rate of 6.22%">
         </div>
-       
+        </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
 </body>
