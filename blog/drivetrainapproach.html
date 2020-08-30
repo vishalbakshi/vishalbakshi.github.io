@@ -15,19 +15,32 @@
           
           <p>one major reason i am enjoying learning deep learning is that the concepts behind it opens up endless analogies with my personal emotional and intellectual development.</p>
           
-          <p>one of the topics covered in Lesson 2 of the <a href="https://course.fast.ai/videos/?lesson=2">fastai course</a> is the drive train approach. jeremy howard has co-authored <a href="https://www.oreilly.com/radar/drivetrain-approach-data-products/">an informative and inspiring article about it</a>, where i took away the following key points:</p>
+          <p>one of the topics covered in Lesson 2 of the <a href="https://course.fast.ai/videos/?lesson=2">fastai course</a> is the drive train approach. jeremy howard has co-authored <a href="https://www.oreilly.com/radar/drivetrain-approach-data-products/">an informative and inspiring article about it</a>, where i took away the following two key points:</p>
           <ul>
           <li>optimization should be focused on the objective</li>
-          <li>optimization leads to new insights instead of just a prediction</li>
+          <li>optimization leads to new insights beyond a prediction</li>
           <ul>
           
-          <p>in my experience, humans start optimization from birth and children only care about optimization, leading to the never ending question: "why?". curiosity is then maybe an optimizing function. </p>
+          <p>in my experience, humans start optimizating from birth and children only care about optimization, leading to the never ending question: "why?". curiosity is then maybe an optimizing function.</p>
           
-          <p>think about the relationship between language, culture, and meaning specifically for languages with <a href="https://en.wikipedia.org/wiki/Grammatical_gender">grammatical gender</a>. in gujarati, the word for chair (khurashee) is feminine, and the word for countertop (otlo) is masculine. why? what is feminine about a chair? i will try to find out:</p>
+          <p>think about the relationship between language, culture, and meaning specifically for languages with <a href="https://en.wikipedia.org/wiki/Grammatical_gender">grammatical gender</a>. in gujarati, the word for chair (khurashee) is feminine, and the word for countertop (otlo) is masculine. why? what is feminine about a chair? is that how it even works?</p>
           
           
-          <p>i've found that the gujarati khurashee is loaned from the arabic <a href="https://en.wikipedia.org/wiki/Kursi#:~:text=The%20Arabic%20word%20for%20throne,of%20a%20president%20or%20chairman.">kursi</a> which means "throne".</p>
-          
+              <p>i've found that the gujarati <em>khurashee</em> is loaned from the arabic <a href="https://en.wikipedia.org/wiki/Kursi#:~:text=The%20Arabic%20word%20for%20throne,of%20a%20president%20or%20chairman.">kursi</a> which means "throne".
+          </p>
+          <p>
+              kursi comes from the root <em>krs</em> which means <a href="https://en.wiktionary.org/wiki/%D9%83_%D8%B1_%D8%B3#Arabic"><em>related to compacting</em></a>. other words derived from the same root mean <em>to consolidate</em>, <em>to become compacted and cohering</em>, and <em>parcel of paper</em>. </p>
+              <p>a natural language processing model may not understand gender, but i imagine that it would probably recognize the features of words that are gendered, based on how that culture thought of gender when root words were formed and as they evolved. </p>
+              <p>an interesting quora response and blog post i came across along the way:<p>
+              <ul>
+                  <li><a href="https://www.babbel.com/en/magazine/evolution-of-grammatical-genders-why-french-has-two-genders-german-has-three-and-english-does-not-care">The Evolution Of Grammatical Genders</a></li>
+                  <li><a href="https://www.quora.com/What-purpose-do-gendered-nouns-have-in-languages-Are-there-any-languages-which-have-never-assigned-a-form-of-gender-to-a-word">Quora: What purpose do gendered nouns have in languages?</a></li>
+              </ul>
+              <p>the model can only predict based on what is known. imagine if gujarati was modified by concensus to change the gender of <em>chair</em> to masculine, maybe it becomes <em>khurashow</em>. you can imagine how long it would take to randomly pick a dataset from all existing gujarati literature and expect equal usage of <em>khurashee</em> and <em>khurashow</em>. i imagine it takes a lot of time for changes in language to permeate through literature.</p>
+              <p>this is where an optimizer would be handy. suppose our objective is to generate text (predict the next word) based on gujarati literature throughout history, i imagine we would have some rule in our optimizer which favors <em>khurashee</em>. on the other hand, if our objective is to generate text based on modern gujarati, we would favor the hypothetical <em>khurashow</em>.</p>
+              <p>i think of the optimizer as sort of a bias we can add to the model. a model's accuracy is based on how well it matches actual labels learned from training data with predictions for new data, but a model's optimizer seems to give the modeler the power to influence the prediction toward a fundamentally different direction than what it was trained toward.</p>
+              <p>i bring this analogy back to my personal development. when i learn from others, i am essentially using their optimizers to reach a different conclusion (prediction) than what i would with my own logic model (architecture + parameters). i label what i perceive as `right`, `wrong`, `adaptive`, `maladaptive`, `true`, `false`, etc. in vulnerability i present those predictions to others through conversation, as they do with me. we explain our thinking to each other, showing the other which parameters to set in our architecture to reach a certain prediction, and how to optimize for a certain objective. over time, we both perceive new data, and continue this exchange, until each other's models have integrated the other's parameters.</p>
+              <p>an effective teacher then, in my opinion, is someone who listens to their students, understands how the student's logic model translates data to conclusions, and then articulates how to implement a different set of parameters, or optimizer to reach different conclusions. imagine the teacher as a deep learning recommendation system, making predictions about what the student understands baesd on their communication skills given the inputs from the student through discourse, assignments, and exams.</p>
           </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
