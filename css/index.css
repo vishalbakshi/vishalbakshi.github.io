@@ -23,3 +23,8 @@ img {
     margin: auto;
     text-align: center;
 }
+
+p.resume {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
