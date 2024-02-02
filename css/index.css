@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+body {
+    font-family: "Outfit", "Segoe UI", SegoeUI, Roboto, "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif !important;
+}
+
+#content, .content {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.landing {
+    width: 80vw;
+    margin: auto;
+    text-align: center;
+}
+
+p.resume {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.nav-link {
+    font-size: 18px;
+}
