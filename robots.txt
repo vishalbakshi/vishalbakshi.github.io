@@ -37,4 +37,3 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://vishalbakshi.com/sitemap.xml
